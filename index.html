@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12355B">
+<title>Vigie – remontées terrain</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦺</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E9EEF2; --surface:#FFFFFF; --ink:#12355B; --ink-soft:#4A6582; --line:#C9D4DE;
+  --accent:#E8590C; --accent-ink:#FFFFFF;
+  --r1:#3E9B5B; --r2:#E2B714; --r3:#EA7A1A; --r4:#C92A2A;
+  --r1-bg:#DDF0E2; --r2-bg:#FBF1C7; --r3-bg:#FDE3CC; --r4-bg:#F8D3D3;
+  --body:'Barlow', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --cond:'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1A26; --surface:#162636; --ink:#E4ECF3; --ink-soft:#9CB2C6; --line:#2A3F54;
+    --r1-bg:#1B3524; --r2-bg:#3A3212; --r3-bg:#40260F; --r4-bg:#431818;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1A26; --surface:#162636; --ink:#E4ECF3; --ink-soft:#9CB2C6; --line:#2A3F54;
+  --r1-bg:#1B3524; --r2-bg:#3A3212; --r3-bg:#40260F; --r4-bg:#431818;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%}
+img{max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 120px}
+header.top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:20px 0 14px;border-bottom:3px solid var(--ink)}
+.brand{font-family:var(--cond);font-weight:700;font-size:44px;line-height:.9;letter-spacing:-.5px}
+.brand small{display:block;font-family:var(--body);font-weight:500;font-size:14px;letter-spacing:0;color:var(--ink-soft);margin-top:6px}
+.tabs{display:flex;gap:4px}
+.tab{border:2px solid var(--ink);background:transparent;padding:6px 12px;font-family:var(--cond);font-weight:600;font-size:17px;cursor:pointer;border-radius:3px}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+
+.notice{margin:16px 0 0;padding:10px 12px;border-left:4px solid var(--accent);background:var(--surface);font-size:15px}
+.notice[hidden]{display:none}
+
+fieldset{border:0;margin:0;padding:0}
+.step{padding:22px 0;border-bottom:1px solid var(--line)}
+.step h2{font-family:var(--cond);font-weight:600;font-size:22px;margin:0 0 4px}
+.hint{color:var(--ink-soft);font-size:14px;margin:0 0 12px}
+
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg label{display:block;border:2px solid var(--line);background:var(--surface);padding:12px;border-radius:4px;cursor:pointer}
+.seg label b{display:block;font-family:var(--cond);font-size:19px;font-weight:600}
+.seg label span{font-size:13px;color:var(--ink-soft)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg input:checked + label{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.seg input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
+
+.drop{display:flex;flex-wrap:wrap;gap:8px}
+.thumb{position:relative;width:96px;height:96px;border-radius:4px;overflow:hidden;background:var(--line)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb button{position:absolute;top:4px;right:4px;width:26px;height:26px;border:0;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;cursor:pointer;line-height:1}
+.addphoto{width:96px;height:96px;border:2px dashed var(--ink-soft);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;font-size:13px;color:var(--ink-soft);background:transparent}
+.addphoto svg{width:28px;height:28px}
+.addbtns{display:flex;gap:8px}
+.mic{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-bottom:10px;padding:14px;border:2px solid var(--ink);border-radius:4px;background:var(--surface);color:var(--ink);font-family:var(--cond);font-weight:600;font-size:20px;cursor:pointer}
+.mic svg{width:24px;height:24px;flex:none}
+.mic.rec{background:var(--r4);border-color:var(--r4);color:#fff}
+.mic.rec .dot{width:10px;height:10px;border-radius:50%;background:#fff;animation:blink 1.2s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.mic.rec .dot{animation:none}}
+.miclive{font-size:14px;color:var(--ink-soft);margin:-4px 0 10px;min-height:1.2em}
+.voice{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--surface);border-radius:4px;padding:10px}
+.voice audio{flex:1 1 220px;min-width:0;height:40px}
+.timer{font-family:var(--cond);font-weight:600;font-size:18px;font-variant-numeric:tabular-nums}
+.transcript{font-style:italic;margin:0;white-space:pre-wrap}
+.linkbtn{background:none;border:0;padding:0;color:var(--ink-soft);text-decoration:underline;cursor:pointer;font-size:14px}
+.gate{max-width:420px;margin:32px auto 0}
+[hidden]{display:none!important}
+
+.field{display:block;margin-bottom:12px}
+.field span{display:block;font-size:14px;font-weight:600;margin-bottom:4px}
+select,input[type=text],textarea{width:100%;padding:11px 12px;border:2px solid var(--line);border-radius:4px;background:var(--surface)}
+textarea{min-height:110px;resize:vertical}
+
+.actions{position:sticky;bottom:0;padding:14px 0 calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--bg) 30%);display:flex;gap:10px}
+.btn{border:0;border-radius:4px;padding:14px 18px;font-family:var(--cond);font-weight:600;font-size:20px;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink);flex:1}
+.btn.ghost{background:transparent;border:2px solid var(--ink);color:var(--ink)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.small{font-size:16px;padding:8px 12px}
+
+/* Résultat */
+.result{margin-top:22px}
+.result[hidden]{display:none}
+.loading{display:flex;align-items:center;gap:12px;padding:18px;background:var(--surface);border-radius:4px}
+.spin{width:22px;height:22px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
+
+.card{background:var(--surface);border-radius:4px;padding:18px;margin-bottom:12px}
+.card h3{font-family:var(--cond);font-weight:600;font-size:21px;margin:0 0 10px}
+.synth{font-size:18px;margin:0}
+.qualif{margin-top:10px;font-size:14px;color:var(--ink-soft)}
+
+.matrix-wrap{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.matrix{display:grid;grid-template-columns:22px repeat(4,1fr);grid-template-rows:repeat(4,1fr) 22px;gap:3px;width:min(260px,62vw);aspect-ratio:1/1}
+.cell{border-radius:2px;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:2px;font-family:var(--cond);font-weight:700;font-size:13px}
+.ax{font-size:12px;color:var(--ink-soft);display:flex;align-items:center;justify-content:center;font-family:var(--cond)}
+.pin{background:var(--ink);color:var(--bg);border-radius:10px;padding:0 6px;line-height:18px}
+.legend{font-size:13px;color:var(--ink-soft);line-height:1.6}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
+@media (max-width:520px){.matrix-wrap{grid-template-columns:1fr}.matrix{width:100%;max-width:300px}}
+
+.danger{border-top:1px solid var(--line);padding:12px 0}
+.danger:first-of-type{border-top:0;padding-top:0}
+.dhead{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.dhead b{font-family:var(--cond);font-size:19px;font-weight:600}
+.badge{font-family:var(--cond);font-weight:700;font-size:15px;padding:2px 8px;border-radius:3px;white-space:nowrap}
+.fam{font-size:13px;color:var(--ink-soft)}
+.danger p{margin:6px 0 0;font-size:15px}
+
+ul.clean{margin:0;padding-left:20px}
+ul.clean li{margin-bottom:6px}
+.mesure{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.mesure:first-of-type{border-top:0}
+.mesure .lvl{font-family:var(--cond);font-weight:600;font-size:16px}
+.mesure .resp{display:block;color:var(--ink-soft);font-size:13px}
+@media (max-width:520px){.mesure{grid-template-columns:1fr;gap:2px}}
+.disclaimer{font-size:13px;color:var(--ink-soft);margin:6px 0 14px}
+
+/* Registre */
+.reg-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:22px 0 12px}
+.reg-head h2{font-family:var(--cond);font-weight:600;font-size:26px;margin:0}
+.entry{background:var(--surface);border-radius:4px;margin-bottom:10px;overflow:hidden;border-left:6px solid var(--line)}
+.entry summary{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px 12px 10px 10px;cursor:pointer;list-style:none}
+.entry summary::-webkit-details-marker{display:none}
+.entry .eimg{width:64px;height:64px;border-radius:3px;object-fit:cover;background:var(--line)}
+.entry .etitle{font-weight:600;font-size:16px;line-height:1.25}
+.entry .emeta{font-size:13px;color:var(--ink-soft)}
+.entry .ebody{padding:0 12px 14px}
+.entry .erow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 14px}
+.entry select{width:auto;padding:6px 10px}
+.empty{padding:40px 16px;text-align:center;color:var(--ink-soft)}
+.empty .btn{margin-top:12px}
+.stat{display:inline-block;font-size:13px;font-weight:600;padding:2px 8px;border-radius:3px;border:1px solid var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Vigie<small>Situations dangereuses et presqu'accidents</small></div>
+    <nav class="tabs" role="tablist" id="tabs" hidden>
+      <button class="tab" role="tab" id="tab-new" aria-selected="true" aria-controls="view-new">Signaler</button>
+      <button class="tab" role="tab" id="tab-reg" aria-selected="false" aria-controls="view-reg">Registre <span id="regCount"></span></button>
+    </nav>
+  </header>
+
+  <p class="notice" id="aiNotice" hidden></p>
+
+  <!-- Accès -->
+  <section id="gate" class="gate" hidden>
+    <div class="card">
+      <h3>Accès</h3>
+      <p class="hint">Saisissez votre nom et le code d'accès fourni par le service QSE.</p>
+      <label class="field"><span>Votre nom</span><input type="text" id="gName" autocomplete="name" placeholder="Prénom Nom"></label>
+      <label class="field"><span>Code d'accès</span><input type="password" id="gCode" autocomplete="current-password"></label>
+      <p class="notice" id="gErr" hidden></p>
+      <button type="button" class="btn primary" id="gBtn" style="width:100%">Entrer</button>
+    </div>
+  </section>
+
+  <main id="app" hidden>
+  <section id="view-new" role="tabpanel" aria-labelledby="tab-new">
+    <form id="form" novalidate>
+      <fieldset class="step">
+        <h2>Ce qui s'est passé</h2>
+        <div class="seg">
+          <input type="radio" name="type" id="t-sd" value="Situation dangereuse" checked>
+          <label for="t-sd"><b>Situation dangereuse</b><span>Un danger est présent, rien ne s'est produit</span></label>
+          <input type="radio" name="type" id="t-pa" value="Presque accident">
+          <label for="t-pa"><b>Presque accident</b><span>Un événement a eu lieu, sans blessé</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="step">
+        <h2>Photos</h2>
+        <p class="hint">Cadrez le danger. Évitez les visages et les plaques d'immatriculation.</p>
+        <div class="drop" id="drop">
+          <div class="addbtns" id="addBtns">
+            <button type="button" class="addphoto" id="btnCam">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+              Appareil photo
+            </button>
+            <button type="button" class="addphoto" id="btnGal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><circle cx="9" cy="10" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg>
+              Galerie
+            </button>
+          </div>
+        </div>
+        <input type="file" id="camInput" accept="image/*" capture="environment" hidden>
+        <input type="file" id="galInput" accept="image/*" multiple hidden>
+      </fieldset>
+
+      <fieldset class="step">
+        <h2>Où</h2>
+        <label class="field"><span>Secteur</span>
+          <select id="secteur">
+            <option>Remontées mécaniques</option>
+            <option>Damage</option>
+            <option>Pistes et sécurité des pistes</option>
+            <option>Ateliers et garages</option>
+            <option>Neige de culture</option>
+            <option>Restauration</option>
+            <option>Accueil, ventes, bâtiments</option>
+            <option>Activités d'été (VTT, luge, randonnée)</option>
+            <option>Autre</option>
+          </select>
+        </label>
+        <label class="field"><span>Lieu précis</span>
+          <input type="text" id="lieu" placeholder="Ex. gare de départ du Jandri 1, quai d'embarquement">
+        </label>
+      </fieldset>
+
+      <fieldset class="step">
+        <h2>Expliquer à l'oral</h2>
+        <p class="hint">Racontez ce que vous avez vu, où, et ce qui aurait pu arriver. L'IA écoute la note et l'intègre à l'analyse. 2 minutes maximum.</p>
+        <div id="voiceBox">
+          <button type="button" class="mic" id="recBtn" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>
+            <span id="recLbl">Enregistrer une note vocale</span>
+            <span class="timer" id="recTimer" hidden>0:00</span>
+          </button>
+          <div class="voice" id="voicePlayer" hidden>
+            <audio id="voiceAudio" controls preload="metadata"></audio>
+            <span class="timer" id="voiceDur"></span>
+            <button type="button" class="btn ghost small" id="voiceDel">Supprimer</button>
+          </div>
+        </div>
+        <p class="miclive" id="recMsg" aria-live="polite"></p>
+      </fieldset>
+
+      <fieldset class="step">
+        <h2>Ou par écrit</h2>
+        <p class="hint">Les faits, sans chercher de coupable. Facultatif si vous avez laissé une note vocale.</p>
+        <textarea id="desc" placeholder="Ex. Plaque de verglas sur l'escalier d'accès au local technique, pas de main courante côté droit."></textarea>
+      </fieldset>
+
+      <div class="actions">
+        <button type="submit" class="btn primary" id="analyzeBtn">Analyser la situation</button>
+      </div>
+    </form>
+
+    <div class="result" id="result" hidden></div>
+  </section>
+
+  <section id="view-reg" role="tabpanel" aria-labelledby="tab-reg" hidden>
+    <div class="reg-head">
+      <h2>Registre</h2>
+      <div style="display:flex;gap:8px">
+        <button class="btn ghost small" id="refreshBtn">Actualiser</button>
+        <button class="btn ghost small" id="exportBtn" hidden>Exporter en CSV</button>
+      </div>
+    </div>
+    <div id="regList"></div>
+    <p class="hint" style="margin-top:20px">Connecté en tant que <b id="whoami"></b>. <button class="linkbtn" id="logoutBtn">Changer d'utilisateur</button></p>
+  </section>
+  </main>
+</div>
+
+<script>
+(() => {
+  // ====== CONFIGURATION ======
+  // Remplacez par l'adresse de votre Worker Cloudflare (étape 3 du guide)
+  const API_URL = 'https://analyseia.hbouget2.workers.dev';
+  // ===========================
+
+  const SESSION_KEY = 'vigie.session.v1';
+  const MAX_PHOTOS = 4;
+  const NIVEAUX = ['Suppression','Substitution','Protection collective','Organisationnel','EPI','Information / formation'];
+  const G_LBL = ['','Bénigne','Sérieuse','Grave','Très grave'];
+  const P_LBL = ['','Improbable','Rare','Probable','Fréquente'];
+  const BAND_LBL = ['','Faible','Modéré','Important','Critique'];
+
+  const $ = s => document.querySelector(s);
+  const el = (tag, attrs = {}, ...kids) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === 'class') n.className = v;
+      else if (k === 'text') n.textContent = v;
+      else if (k === 'style') n.setAttribute('style', v);
+      else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+      else n.setAttribute(k, v);
+    }
+    for (const kid of kids) if (kid != null) n.append(kid);
+    return n;
+  };
+  const band = c => c >= 12 ? 4 : c >= 8 ? 3 : c >= 4 ? 2 : 1;
+  const bandColors = b => ({bg:`var(--r${b}-bg)`, fg:`var(--r${b})`});
+  const notice = msg => { const n = $('#aiNotice'); n.textContent = msg || ''; n.hidden = !msg; };
+
+  // ---------- Session et API ----------
+  let session = null;
+  const loadSession = () => { try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch { return null; } };
+  const saveSession = s => { try { s ? localStorage.setItem(SESSION_KEY, JSON.stringify(s)) : localStorage.removeItem(SESSION_KEY); } catch {} };
+
+  async function api(path, { method = 'GET', body, signal } = {}) {
+    let r;
+    try {
+      r = await fetch(API_URL + path, {
+        method, signal,
+        headers: { 'Content-Type': 'application/json', 'X-Access-Code': session?.code || '' },
+        body: body ? JSON.stringify(body) : undefined,
+      });
+    } catch (e) {
+      if (e?.name === 'AbortError') throw { status: 0, aborted: true };
+      throw { status: 0, message: 'Serveur injoignable. Vérifiez votre connexion.' };
+    }
+    let data = null;
+    try { data = await r.json(); } catch {}
+    if (!r.ok) {
+      if (r.status === 401 && path !== '/api/ping') showGate("Votre code d'accès n'est plus valide. Saisissez le nouveau code.");
+      throw { status: r.status, message: data?.error || '' };
+    }
+    return data;
+  }
+
+  function showGate(msg) {
+    $('#gate').hidden = false; $('#app').hidden = true; $('#tabs').hidden = true;
+    $('#gName').value = session?.name || loadSession()?.name || '';
+    $('#gErr').textContent = msg || ''; $('#gErr').hidden = !msg;
+  }
+  function showApp() {
+    $('#gate').hidden = true; $('#app').hidden = false; $('#tabs').hidden = false;
+    $('#whoami').textContent = session.name + (session.role === 'admin' ? ' (administrateur)' : '');
+    loadRegistre();
+  }
+  async function enter(name, code) {
+    session = { name, code };
+    const r = await api('/api/ping');
+    session.role = r.role;
+    saveSession(session);
+    showApp();
+  }
+  $('#gBtn').onclick = async () => {
+    const name = $('#gName').value.trim(), code = $('#gCode').value.trim();
+    if (!name || !code) { $('#gErr').textContent = 'Renseignez votre nom et le code.'; $('#gErr').hidden = false; return; }
+    $('#gBtn').disabled = true;
+    try { await enter(name, code); $('#gCode').value = ''; }
+    catch (e) { showGate(e.status === 401 ? "Code d'accès incorrect." : (e.message || 'Connexion impossible.')); }
+    finally { $('#gBtn').disabled = false; }
+  };
+  $('#gCode').addEventListener('keydown', e => { if (e.key === 'Enter') $('#gBtn').click(); });
+  $('#logoutBtn').onclick = () => { const name = session?.name; session = null; saveSession({ name }); showGate(); };
+
+  // ---------- Onglets ----------
+  const showTab = which => {
+    const isNew = which === 'new';
+    $('#tab-new').setAttribute('aria-selected', isNew);
+    $('#tab-reg').setAttribute('aria-selected', !isNew);
+    $('#view-new').hidden = !isNew;
+    $('#view-reg').hidden = isNew;
+    if (!isNew) loadRegistre();
+  };
+  $('#tab-new').onclick = () => showTab('new');
+  $('#tab-reg').onclick = () => showTab('reg');
+
+  // ---------- Photos ----------
+  let photos = []; // {b64, url}
+  const toJpeg = (file, max = 1568, q = .85) => new Promise((res, rej) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const r = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * r); c.height = Math.round(img.height * r);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      res(c.toDataURL('image/jpeg', q));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('decode')); };
+    img.src = url;
+  });
+  const renderPhotos = () => {
+    const drop = $('#drop');
+    drop.querySelectorAll('.thumb').forEach(t => t.remove());
+    photos.forEach((p, i) => {
+      drop.insertBefore(el('div', {class:'thumb'},
+        el('img', {src:p.url, alt:`Photo ${i+1}`}),
+        el('button', {type:'button', 'aria-label':`Retirer la photo ${i+1}`, text:'×', onclick:() => { photos.splice(i,1); renderPhotos(); }})
+      ), $('#addBtns'));
+    });
+    $('#addBtns').hidden = photos.length >= MAX_PHOTOS;
+  };
+  $('#btnCam').onclick = () => $('#camInput').click();
+  $('#btnGal').onclick = () => $('#galInput').click();
+  const onFiles = async e => {
+    const files = [...e.target.files]; e.target.value = '';
+    let skipped = 0;
+    for (const f of files) {
+      if (photos.length >= MAX_PHOTOS) break;
+      try { const url = await toJpeg(f); photos.push({ url, b64: url.split(',')[1] }); }
+      catch { skipped++; }
+    }
+    notice(skipped ? `${skipped} photo(s) n'ont pas pu être lues. Utilisez du JPEG ou du PNG.` : '');
+    renderPhotos();
+  };
+  $('#camInput').onchange = onFiles;
+  $('#galInput').onchange = onFiles;
+
+  const makeThumb = src => new Promise(res => {
+    if (!src) return res(null);
+    const img = new Image();
+    img.onload = () => {
+      const s = 320, c = document.createElement('canvas');
+      const r = Math.max(s / img.width, s / img.height);
+      c.width = s; c.height = s;
+      c.getContext('2d').drawImage(img, (s - img.width*r)/2, (s - img.height*r)/2, img.width*r, img.height*r);
+      res(c.toDataURL('image/jpeg', .7));
+    };
+    img.onerror = () => res(null);
+    img.src = src;
+  });
+
+  // ---------- Note vocale ----------
+  const MAX_REC_S = 120;
+  let mediaRec = null, recChunks = [], voice = null, recTick = null, recT0 = 0, recStopped = null;
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const recBtn = $('#recBtn'), recLbl = $('#recLbl'), recTimer = $('#recTimer'), recMsg = $('#recMsg');
+  const canRecord = !!(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
+  const pickMime = () => ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus']
+    .find(t => MediaRecorder.isTypeSupported?.(t)) || '';
+  const isRecording = () => mediaRec && mediaRec.state === 'recording';
+
+  const renderVoice = () => {
+    const rec = isRecording();
+    recBtn.hidden = !!voice && !rec;
+    recBtn.classList.toggle('rec', rec);
+    recBtn.setAttribute('aria-pressed', rec);
+    recBtn.querySelector('svg').style.display = rec ? 'none' : '';
+    const dot = recBtn.querySelector('.dot');
+    if (rec && !dot) recBtn.prepend(el('span', {class:'dot', 'aria-hidden':'true'}));
+    if (!rec && dot) dot.remove();
+    recLbl.textContent = rec ? 'Arrêter' : 'Enregistrer une note vocale';
+    recTimer.hidden = !rec;
+    $('#voicePlayer').hidden = !voice;
+    if (voice) { $('#voiceAudio').src = voice.url; $('#voiceDur').textContent = fmt(voice.duration); }
+  };
+
+  async function startRecording() {
+    recMsg.textContent = '';
+    let stream;
+    try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); }
+    catch (e) {
+      recMsg.textContent = e?.name === 'NotAllowedError'
+        ? "Micro bloqué. Autorisez l'accès au micro pour ce site dans les réglages du navigateur."
+        : 'Aucun micro disponible sur cet appareil.';
+      return;
+    }
+    const mime = pickMime();
+    recChunks = [];
+    mediaRec = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 32000 } : {});
+    mediaRec.ondataavailable = ev => { if (ev.data.size) recChunks.push(ev.data); };
+    recStopped = new Promise(res => {
+      mediaRec.onstop = () => {
+        stream.getTracks().forEach(t => t.stop());
+        clearInterval(recTick);
+        const duration = (Date.now() - recT0) / 1000;
+        const blob = new Blob(recChunks, { type: (mediaRec.mimeType || mime || 'audio/webm').split(';')[0] });
+        if (duration < 1 || !blob.size) { recMsg.textContent = 'Enregistrement trop court. Réessayez.'; }
+        else { voice = { blob, url: URL.createObjectURL(blob), duration, mime: blob.type }; recMsg.textContent = "Note enregistrée. Réécoutez-la si besoin, puis lancez l'analyse."; }
+        renderVoice(); res();
+      };
+    });
+    mediaRec.start(1000);
+    recT0 = Date.now();
+    recTimer.textContent = '0:00';
+    recTick = setInterval(() => {
+      const t = (Date.now() - recT0) / 1000;
+      recTimer.textContent = `${fmt(t)} / ${fmt(MAX_REC_S)}`;
+      if (t >= MAX_REC_S) { mediaRec.stop(); recMsg.textContent = 'Durée maximale atteinte.'; }
+    }, 250);
+    renderVoice();
+  }
+  async function stopRecording() { if (isRecording()) { mediaRec.stop(); await recStopped; } }
+  const clearVoice = () => { if (voice) URL.revokeObjectURL(voice.url); voice = null; $('#voiceAudio').removeAttribute('src'); renderVoice(); };
+
+  if (canRecord) {
+    recBtn.onclick = () => isRecording() ? stopRecording() : startRecording();
+    $('#voiceDel').onclick = () => { clearVoice(); recMsg.textContent = ''; };
+  } else {
+    $('#voiceBox').hidden = true;
+    recMsg.textContent = "L'enregistrement vocal n'est pas disponible sur ce navigateur. Décrivez la situation par écrit.";
+  }
+  const blobToB64 = blob => new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(',')[1]);
+    r.onerror = () => rej(new Error('read'));
+    r.readAsDataURL(blob);
+  });
+
+  // ---------- Normalisation de l'analyse ----------
+  const clamp4 = v => Math.min(4, Math.max(1, Math.round(Number(v) || 1)));
+  const arr = v => Array.isArray(v) ? v : [];
+  const normalize = a => ({
+    synthese: String(a?.synthese || ''),
+    qualification_commentaire: String(a?.qualification_commentaire || ''),
+    photo_exploitable: a?.photo_exploitable !== false,
+    remarque_photo: String(a?.remarque_photo || ''),
+    dangers: arr(a?.dangers).slice(0, 6).map(d => {
+      const g = clamp4(d.gravite), p = clamp4(d.probabilite);
+      return { famille:String(d.famille||'Autre'), danger:String(d.danger||''), dommage_possible:String(d.dommage_possible||''), gravite:g, probabilite:p, criticite:g*p, justification:String(d.justification||'') };
+    }),
+    mesures_immediates: arr(a?.mesures_immediates).map(String).filter(Boolean),
+    mesures_preventives: arr(a?.mesures_preventives).map(m => ({niveau:String(m.niveau||''), mesure:String(m.mesure||''), responsable_suggere:String(m.responsable_suggere||'')}))
+      .filter(m => m.mesure)
+      .sort((x,y) => (NIVEAUX.indexOf(x.niveau)+99)%99 - (NIVEAUX.indexOf(y.niveau)+99)%99),
+    points_a_verifier: arr(a?.points_a_verifier).map(String).filter(Boolean),
+    references: arr(a?.references).map(String).filter(Boolean),
+  });
+
+  const transcriptCard = t => t ? el('div', {class:'card'}, el('h3', {text:'Note vocale transcrite'}),
+    el('p', {class:'transcript', text:t}),
+    el('p', {class:'hint', style:'margin:8px 0 0', text:'Transcription automatique, peut contenir des erreurs.'})) : null;
+
+  // ---------- Rendu de l'analyse ----------
+  const renderMatrix = dangers => {
+    const m = el('div', {class:'matrix', role:'img', 'aria-label':'Matrice gravité par probabilité'});
+    for (let g = 4; g >= 1; g--) {
+      m.append(el('div', {class:'ax', text:String(g), title:`Gravité ${g} : ${G_LBL[g]}`}));
+      for (let p = 1; p <= 4; p++) {
+        const c = bandColors(band(g*p));
+        const cell = el('div', {class:'cell', style:`background:${c.bg};box-shadow:inset 0 0 0 1px ${c.fg}`});
+        dangers.forEach((d, i) => { if (d.gravite === g && d.probabilite === p) cell.append(el('span', {class:'pin', text:`D${i+1}`})); });
+        m.append(cell);
+      }
+    }
+    m.append(el('div'));
+    for (let p = 1; p <= 4; p++) m.append(el('div', {class:'ax', text:String(p), title:`Probabilité ${p} : ${P_LBL[p]}`}));
+    const leg = el('div', {class:'legend'},
+      el('div', {text:'Vertical : gravité. Horizontal : probabilité.'}),
+      ...[4,3,2,1].map(b => el('div', {}, el('i', {style:`background:var(--r${b})`}), `${BAND_LBL[b]} (${['','1 à 3','4 à 6','8 à 9','12 à 16'][b]})`))
+    );
+    return el('div', {class:'matrix-wrap'}, m, leg);
+  };
+
+  const renderAnalysis = a => {
+    const frag = document.createDocumentFragment();
+    const top = el('div', {class:'card'}, el('h3', {text:'Synthèse'}), el('p', {class:'synth', text:a.synthese}));
+    if (a.qualification_commentaire) top.append(el('p', {class:'qualif', text:`Qualification : ${a.qualification_commentaire}`}));
+    if (!a.photo_exploitable && a.remarque_photo) top.append(el('p', {class:'qualif', text:`Photo : ${a.remarque_photo}`}));
+    frag.append(top);
+    if (a.dangers.length) {
+      frag.append(el('div', {class:'card'}, el('h3', {text:'Cotation des risques'}), renderMatrix(a.dangers)));
+      const dl = el('div', {class:'card'}, el('h3', {text:'Dangers identifiés'}));
+      a.dangers.forEach((d, i) => {
+        const b = band(d.criticite), col = bandColors(b);
+        dl.append(el('div', {class:'danger'},
+          el('div', {class:'dhead'},
+            el('b', {text:`D${i+1}. ${d.danger}`}),
+            el('span', {class:'badge', style:`background:${col.bg};color:${col.fg};box-shadow:inset 0 0 0 1px ${col.fg}`, text:`${d.criticite} · ${BAND_LBL[b]}`})
+          ),
+          el('div', {class:'fam', text:`${d.famille}. Gravité ${d.gravite} (${G_LBL[d.gravite]}), probabilité ${d.probabilite} (${P_LBL[d.probabilite]})`}),
+          d.dommage_possible ? el('p', {text:`Dommage possible : ${d.dommage_possible}`}) : null,
+          d.justification ? el('p', {text:d.justification}) : null
+        ));
+      });
+      frag.append(dl);
+    }
+    if (a.mesures_immediates.length) frag.append(el('div', {class:'card', style:'border-left:5px solid var(--accent)'},
+      el('h3', {text:'À faire tout de suite'}), el('ul', {class:'clean'}, ...a.mesures_immediates.map(t => el('li', {text:t})))));
+    if (a.mesures_preventives.length) {
+      const c = el('div', {class:'card'}, el('h3', {text:'Mesures préventives'}),
+        el('p', {class:'hint', text:'Classées selon les principes généraux de prévention, du plus efficace au moins efficace.'}));
+      a.mesures_preventives.forEach(m => c.append(el('div', {class:'mesure'},
+        el('div', {class:'lvl', text:m.niveau || 'Autre'}),
+        el('div', {}, m.mesure, m.responsable_suggere ? el('span', {class:'resp', text:`Pilote suggéré : ${m.responsable_suggere}`}) : null))));
+      frag.append(c);
+    }
+    if (a.points_a_verifier.length) frag.append(el('div', {class:'card'}, el('h3', {text:'À vérifier sur place'}),
+      el('ul', {class:'clean'}, ...a.points_a_verifier.map(t => el('li', {text:t})))));
+    if (a.references.length) frag.append(el('div', {class:'card'}, el('h3', {text:'Références à consulter'}),
+      el('ul', {class:'clean'}, ...a.references.map(t => el('li', {text:t}))),
+      el('p', {class:'hint', style:'margin:8px 0 0', text:'À confirmer dans le texte en vigueur.'})));
+    frag.append(el('p', {class:'disclaimer', text:"Proposition générée par IA à partir des photos et de la description. La cotation et les mesures sont à valider par le service QSE."}));
+    return frag;
+  };
+
+  // ---------- Analyse ----------
+  const errMsg = e => e.message || ({
+    429: "Trop de demandes. Réessayez dans une minute.",
+    413: "Photos trop lourdes. Retirez-en une.",
+    502: "Le service d'analyse est momentanément indisponible. Réessayez.",
+  }[e.status]) || "L'analyse a échoué. Réessayez dans un instant.";
+
+  let ctl = null, current = null;
+  $('#form').onsubmit = async e => {
+    e.preventDefault();
+    await stopRecording();
+    const d = {
+      type: document.querySelector('input[name=type]:checked').value,
+      secteur: $('#secteur').value,
+      lieu: $('#lieu').value.trim().slice(0, 300),
+      desc: $('#desc').value.trim().slice(0, 3000),
+    };
+    const res = $('#result');
+    if (!photos.length && !d.desc && !voice) {
+      res.hidden = false;
+      res.replaceChildren(el('p', {class:'notice', text:"Ajoutez au moins une photo, une note vocale ou une description pour lancer l'analyse."}));
+      return;
+    }
+    ctl = new AbortController();
+    const btn = $('#analyzeBtn'); btn.disabled = true;
+    res.hidden = false;
+    res.replaceChildren(el('div', {class:'loading'}, el('div', {class:'spin', 'aria-hidden':'true'}),
+      el('div', {style:'flex:1'}, el('b', {text:'Analyse en cours'}), el('div', {class:'hint', style:'margin:0', text:'Comptez 20 à 60 secondes.'})),
+      el('button', {type:'button', class:'btn ghost small', text:'Arrêter', onclick:() => ctl.abort()})));
+    res.scrollIntoView({behavior:'smooth', block:'start'});
+    try {
+      const audio = voice ? { data: await blobToB64(voice.blob), mime: voice.mime } : null;
+      const r = await api('/api/analyze', { method:'POST', signal:ctl.signal, body:{ ...d, images: photos.map(p => p.b64), audio } });
+      const a = normalize(r.analysis);
+      const transcript = String(r.transcript || '');
+      if (!a.dangers.length && !a.synthese) throw { message: "La réponse n'a pas pu être lue. Relancez l'analyse." };
+      current = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), date: new Date().toISOString(), ...d,
+        thumb: await makeThumb(photos[0]?.url), note_vocale: transcript, analysis: a, statut: 'Ouvert' };
+      const saveBtn = el('button', {type:'button', class:'btn primary', text:'Enregistrer au registre'});
+      saveBtn.onclick = async () => {
+        saveBtn.disabled = true; saveBtn.textContent = 'Enregistrement…';
+        try { await api('/api/remontees', { method:'POST', body:{ ...current, declarant: session.name } }); saveBtn.textContent = 'Enregistrée'; loadRegistre(); }
+        catch (err) { saveBtn.disabled = false; saveBtn.textContent = "Échec de l'enregistrement, réessayer"; }
+      };
+      res.replaceChildren(transcriptCard(transcript), renderAnalysis(a), el('div', {class:'actions'}, saveBtn,
+        el('button', {type:'button', class:'btn ghost', text:'Nouvelle remontée', onclick:resetForm})));
+    } catch (err) {
+      if (err?.aborted) { res.hidden = true; res.replaceChildren(); }
+      else if (err?.status !== 401) res.replaceChildren(el('p', {class:'notice', text: errMsg(err)}));
+    } finally { btn.disabled = false; }
+  };
+  function resetForm(){
+    stopRecording(); clearVoice(); recMsg.textContent = canRecord ? '' : recMsg.textContent;
+    photos = []; renderPhotos();
+    $('#form').reset(); $('#result').hidden = true; $('#result').replaceChildren(); notice('');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // ---------- Registre ----------
+  let entries = [], regLoaded = false, regError = '';
+  const openIds = new Set();
+  const maxCrit = e => Math.max(0, ...(e.analysis?.dangers || []).map(d => d.criticite));
+
+  async function loadRegistre(){
+    if (!session) return;
+    try { entries = (await api('/api/remontees')).items || []; regError = ''; regLoaded = true; }
+    catch (e) { if (e.status !== 401) regError = e.message || 'Le registre ne peut pas être chargé.'; }
+    renderRegistre();
+  }
+  $('#refreshBtn').onclick = loadRegistre;
+  setInterval(() => { if (session && !document.hidden && !$('#view-reg').hidden) loadRegistre(); }, 30000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && session) loadRegistre(); });
+
+  function renderRegistre(){
+    const box = $('#regList');
+    $('#regCount').textContent = entries.length ? `(${entries.length})` : '';
+    $('#exportBtn').hidden = !entries.length;
+    const top = regError ? [el('p', {class:'notice', style:'margin:0 0 12px', text:regError})] : [];
+    if (!regLoaded) { box.replaceChildren(...top, el('div', {class:'empty'}, el('p', {text:'Chargement du registre…'}))); return; }
+    if (!entries.length) {
+      box.replaceChildren(...top, el('div', {class:'empty'}, el('p', {text:'Aucune remontée dans le registre.'}),
+        el('button', {class:'btn primary small', text:'Faire une remontée', onclick:() => showTab('new')})));
+      return;
+    }
+    box.replaceChildren(...top, ...entries.map(e => {
+      const c = maxCrit(e), b = band(c || 1), col = bandColors(b);
+      const d = new Date(e.date);
+      const statut = el('select', {'aria-label':'Statut'}, ...['Ouvert','En cours','Clôturé'].map(s => { const o = el('option', {text:s}); if (s === e.statut) o.selected = true; return o; }));
+      statut.onchange = async () => {
+        try { await api(`/api/remontees/${encodeURIComponent(e.id)}`, { method:'PATCH', body:{ statut: statut.value } }); e.statut = statut.value; renderRegistre(); }
+        catch { alert("Le statut n'a pas pu être modifié."); statut.value = e.statut; }
+      };
+      const del = session.role === 'admin' ? el('button', {type:'button', class:'btn ghost small', text:'Supprimer', onclick: async () => {
+        if (!confirm('Supprimer cette remontée du registre ? Elle disparaîtra pour tout le monde.')) return;
+        try { await api(`/api/remontees/${encodeURIComponent(e.id)}`, { method:'DELETE' }); openIds.delete(e.id); loadRegistre(); }
+        catch { alert('La suppression a échoué.'); }
+      }}) : null;
+      const det = el('details', {class:'entry', style:`border-left-color:${col.fg}`},
+        el('summary', {},
+          e.thumb ? el('img', {class:'eimg', src:e.thumb, alt:''}) : el('div', {class:'eimg'}),
+          el('div', {},
+            el('div', {class:'etitle', text:e.analysis?.dangers?.[0]?.danger || String(e.analysis?.synthese || '').slice(0,80)}),
+            el('div', {class:'emeta', text:`${d.toLocaleDateString('fr-FR')} · ${e.type} · ${e.secteur}${e.lieu ? ', ' + e.lieu : ''}${e.declarant ? ' · ' + e.declarant : ''}`})
+          ),
+          el('div', {style:'text-align:right'},
+            el('span', {class:'badge', style:`background:${col.bg};color:${col.fg}`, text:c ? String(c) : '–'}),
+            el('div', {class:'stat', style:'margin-top:6px', text:e.statut})
+          )
+        ),
+        el('div', {class:'ebody'},
+          el('div', {class:'erow'}, el('span', {style:'font-size:14px;font-weight:600', text:'Statut'}), statut, del),
+          e.desc ? el('p', {class:'hint', text:`Déclaration : ${e.desc}`}) : null,
+          e.note_vocale ? el('p', {class:'hint', text:`Note vocale : ${e.note_vocale}`}) : null,
+          renderAnalysis(normalize(e.analysis))
+        )
+      );
+      if (openIds.has(e.id)) det.open = true;
+      det.addEventListener('toggle', () => det.open ? openIds.add(e.id) : openIds.delete(e.id));
+      return det;
+    }));
+  }
+
+  // ---------- Export CSV ----------
+  const csvCell = v => `"${String(v ?? '').replace(/"/g,'""').replace(/\r?\n/g,' ')}"`;
+  $('#exportBtn').onclick = () => {
+    const head = ['ID','Date','Déclarant','Type','Secteur','Lieu','Description','Note vocale','Statut','N° danger','Famille','Danger','Dommage possible','Gravité','Probabilité','Criticité','Niveau','Mesures immédiates','Mesures préventives'];
+    const rows = [head];
+    for (const e of entries) {
+      const a = normalize(e.analysis);
+      const imm = a.mesures_immediates.join(' / ');
+      const prev = a.mesures_preventives.map(m => `[${m.niveau}] ${m.mesure}`).join(' / ');
+      const ds = a.dangers.length ? a.dangers : [null];
+      ds.forEach((d, i) => rows.push([e.id, new Date(e.date).toLocaleString('fr-FR'), e.declarant, e.type, e.secteur, e.lieu, e.desc, e.note_vocale, e.statut,
+        d ? i+1 : '', d?.famille, d?.danger, d?.dommage_possible, d?.gravite, d?.probabilite, d?.criticite, d ? BAND_LBL[band(d.criticite)] : '', imm, prev]));
+    }
+    const csv = '\ufeff' + rows.map(r => r.map(csvCell).join(';')).join('\r\n');
+    const url = URL.createObjectURL(new Blob([csv], { type:'text/csv;charset=utf-8' }));
+    const a = el('a', { href:url, download:`registre-remontees-${new Date().toISOString().slice(0,10)}.csv` });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  // ---------- Démarrage ----------
+  (async () => {
+    if (API_URL.includes('VOTRE-SOUS-DOMAINE')) { showGate("Application non configurée : renseignez l'adresse du serveur (API_URL) dans index.html."); return; }
+    const s = loadSession();
+    if (s?.code && s?.name) {
+      try { await enter(s.name, s.code); return; }
+      catch (e) { session = null; showGate(e.status === 401 ? "Le code d'accès a changé. Saisissez le nouveau code." : (e.message || 'Connexion impossible.')); return; }
+    }
+    showGate();
+  })();
+})();
+
+</script>
+</body>
+</html>
