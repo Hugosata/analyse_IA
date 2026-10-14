@@ -4,53 +4,63 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12355B">
-<title>Vigie – remontées terrain</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦺</text></svg>">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vigie">
+<title>Vigie – Remontées terrain Les 2 Alpes</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#E9EEF2; --surface:#FFFFFF; --ink:#12355B; --ink-soft:#4A6582; --line:#C9D4DE;
-  --accent:#E8590C; --accent-ink:#FFFFFF;
-  --r1:#3E9B5B; --r2:#E2B714; --r3:#EA7A1A; --r4:#C92A2A;
+  --bg:#EEF2F5; --surface:#FFFFFF; --surface-2:#F6F8FA; --ink:#12355B; --ink-soft:#4A6582; --line:#CBD5DF;
+  --brand:#DB222E;
+  --r1:#2F8A4E; --r2:#C99A06; --r3:#D9660F; --r4:#C92A2A;
   --r1-bg:#DDF0E2; --r2-bg:#FBF1C7; --r3-bg:#FDE3CC; --r4-bg:#F8D3D3;
-  --body:'Barlow', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --cond:'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif;
+  --body:'Barlow','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --cond:'Barlow Condensed','Arial Narrow','Roboto Condensed',sans-serif;
+  --nav-h:64px;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0E1A26; --surface:#162636; --ink:#E4ECF3; --ink-soft:#9CB2C6; --line:#2A3F54;
+    --bg:#0E1A26; --surface:#162636; --surface-2:#1B2E41; --ink:#E4ECF3; --ink-soft:#9CB2C6; --line:#2C4258; --brand:#F0444F;
     --r1-bg:#1B3524; --r2-bg:#3A3212; --r3-bg:#40260F; --r4-bg:#431818;
+    --r1:#5CC17F; --r2:#E2B714; --r3:#F08A3C; --r4:#F06060;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0E1A26; --surface:#162636; --ink:#E4ECF3; --ink-soft:#9CB2C6; --line:#2A3F54;
+  --bg:#0E1A26; --surface:#162636; --surface-2:#1B2E41; --ink:#E4ECF3; --ink-soft:#9CB2C6; --line:#2C4258; --brand:#F0444F;
   --r1-bg:#1B3524; --r2-bg:#3A3212; --r3-bg:#40260F; --r4-bg:#431818;
+  --r1:#5CC17F; --r2:#E2B714; --r3:#F08A3C; --r4:#F06060;
 }
 *,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none!important}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%}
 img{max-width:100%}
 button,input,select,textarea{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
 
-.wrap{max-width:720px;margin:0 auto;padding:0 16px 120px}
-header.top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:20px 0 14px;border-bottom:3px solid var(--ink)}
-.brand{font-family:var(--cond);font-weight:700;font-size:44px;line-height:.9;letter-spacing:-.5px}
-.brand small{display:block;font-family:var(--body);font-weight:500;font-size:14px;letter-spacing:0;color:var(--ink-soft);margin-top:6px}
-.tabs{display:flex;gap:4px}
-.tab{border:2px solid var(--ink);background:transparent;padding:6px 12px;font-family:var(--cond);font-weight:600;font-size:17px;cursor:pointer;border-radius:3px}
-.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.wrap{max-width:780px;margin:0 auto;padding:0 16px calc(var(--nav-h) + 40px + env(safe-area-inset-bottom,0px))}
+header.top{display:flex;align-items:center;gap:14px;padding:16px 0 14px;border-bottom:3px solid var(--ink)}
+.logo{height:40px;width:auto;flex:none;display:block}
+.appname{font-family:var(--cond);font-weight:700;font-size:30px;line-height:.95;padding-left:14px;border-left:2px solid var(--line)}
+.appname small{display:block;font-family:var(--body);font-weight:500;font-size:13px;color:var(--ink-soft);margin-top:4px}
+.netchip{margin-left:auto;font-size:13px;font-weight:600;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.netchip.off{background:var(--surface);border:1px solid var(--ink-soft);color:var(--ink-soft)}
+.netchip.wait{background:var(--r2-bg);color:var(--ink);border:1px solid var(--r2)}
+@media (max-width:420px){.logo{height:32px}.appname{font-size:24px;padding-left:10px}.appname small{display:none}}
 
-.notice{margin:16px 0 0;padding:10px 12px;border-left:4px solid var(--accent);background:var(--surface);font-size:15px}
-.notice[hidden]{display:none}
+.notice{margin:16px 0 0;padding:10px 12px;border-left:4px solid var(--brand);background:var(--surface);font-size:15px}
+.view-title{font-family:var(--cond);font-weight:600;font-size:28px;margin:22px 0 4px}
+.view-sub{color:var(--ink-soft);font-size:15px;margin:0 0 14px}
 
 fieldset{border:0;margin:0;padding:0}
-.step{padding:22px 0;border-bottom:1px solid var(--line)}
+.step{padding:20px 0;border-bottom:1px solid var(--line)}
 .step h2{font-family:var(--cond);font-weight:600;font-size:22px;margin:0 0 4px}
 .hint{color:var(--ink-soft);font-size:14px;margin:0 0 12px}
 
@@ -60,64 +70,58 @@ fieldset{border:0;margin:0;padding:0}
 .seg label span{font-size:13px;color:var(--ink-soft)}
 .seg input{position:absolute;opacity:0;pointer-events:none}
 .seg input:checked + label{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
-.seg input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
+.seg input:focus-visible + label{outline:3px solid var(--brand);outline-offset:2px}
 
 .drop{display:flex;flex-wrap:wrap;gap:8px}
 .thumb{position:relative;width:96px;height:96px;border-radius:4px;overflow:hidden;background:var(--line)}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .thumb button{position:absolute;top:4px;right:4px;width:26px;height:26px;border:0;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;cursor:pointer;line-height:1}
+.addbtns{display:flex;gap:8px}
 .addphoto{width:96px;height:96px;border:2px dashed var(--ink-soft);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;font-size:13px;color:var(--ink-soft);background:transparent}
 .addphoto svg{width:28px;height:28px}
-.addbtns{display:flex;gap:8px}
+
 .mic{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-bottom:10px;padding:14px;border:2px solid var(--ink);border-radius:4px;background:var(--surface);color:var(--ink);font-family:var(--cond);font-weight:600;font-size:20px;cursor:pointer}
 .mic svg{width:24px;height:24px;flex:none}
 .mic.rec{background:var(--r4);border-color:var(--r4);color:#fff}
 .mic.rec .dot{width:10px;height:10px;border-radius:50%;background:#fff;animation:blink 1.2s ease-in-out infinite}
 @keyframes blink{50%{opacity:.25}}
-@media (prefers-reduced-motion:reduce){.mic.rec .dot{animation:none}}
 .miclive{font-size:14px;color:var(--ink-soft);margin:-4px 0 10px;min-height:1.2em}
 .voice{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--surface);border-radius:4px;padding:10px}
 .voice audio{flex:1 1 220px;min-width:0;height:40px}
 .timer{font-family:var(--cond);font-weight:600;font-size:18px;font-variant-numeric:tabular-nums}
-.transcript{font-style:italic;margin:0;white-space:pre-wrap}
-.linkbtn{background:none;border:0;padding:0;color:var(--ink-soft);text-decoration:underline;cursor:pointer;font-size:14px}
-.gate{max-width:420px;margin:32px auto 0}
-[hidden]{display:none!important}
 
 .field{display:block;margin-bottom:12px}
-.field span{display:block;font-size:14px;font-weight:600;margin-bottom:4px}
-select,input[type=text],textarea{width:100%;padding:11px 12px;border:2px solid var(--line);border-radius:4px;background:var(--surface)}
-textarea{min-height:110px;resize:vertical}
+.field>span{display:block;font-size:14px;font-weight:600;margin-bottom:4px}
+select,input[type=text],input[type=password],input[type=search],textarea{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:4px;background:var(--surface)}
+textarea{min-height:96px;resize:vertical}
 
-.actions{position:sticky;bottom:0;padding:14px 0 calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--bg) 30%);display:flex;gap:10px}
-.btn{border:0;border-radius:4px;padding:14px 18px;font-family:var(--cond);font-weight:600;font-size:20px;cursor:pointer}
-.btn.primary{background:var(--accent);color:var(--accent-ink);flex:1}
+.btn{border:0;border-radius:4px;padding:13px 18px;font-family:var(--cond);font-weight:600;font-size:20px;cursor:pointer;background:var(--ink);color:var(--surface)}
+.btn.block{display:block;width:100%}
 .btn.ghost{background:transparent;border:2px solid var(--ink);color:var(--ink)}
+.btn.danger{background:transparent;border:2px solid var(--r4);color:var(--r4)}
+.btn.small{font-size:16px;padding:7px 12px}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-.btn.small{font-size:16px;padding:8px 12px}
+.linkbtn{background:none;border:0;padding:0;color:var(--ink-soft);text-decoration:underline;cursor:pointer;font-size:14px}
+.submitbar{padding:20px 0 0}
 
-/* Résultat */
-.result{margin-top:22px}
-.result[hidden]{display:none}
-.loading{display:flex;align-items:center;gap:12px;padding:18px;background:var(--surface);border-radius:4px}
-.spin{width:22px;height:22px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite}
-@keyframes sp{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
-
-.card{background:var(--surface);border-radius:4px;padding:18px;margin-bottom:12px}
+.card{background:var(--surface);border-radius:4px;padding:16px;margin-bottom:12px}
 .card h3{font-family:var(--cond);font-weight:600;font-size:21px;margin:0 0 10px}
+.success{border-left:5px solid var(--r1)}
+.spin{width:20px;height:20px;border:3px solid var(--line);border-top-color:var(--ink);border-radius:50%;animation:sp 1s linear infinite;display:inline-block;vertical-align:middle}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin,.mic.rec .dot{animation:none}}
+
+/* Analyse */
 .synth{font-size:18px;margin:0}
 .qualif{margin-top:10px;font-size:14px;color:var(--ink-soft)}
-
 .matrix-wrap{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
-.matrix{display:grid;grid-template-columns:22px repeat(4,1fr);grid-template-rows:repeat(4,1fr) 22px;gap:3px;width:min(260px,62vw);aspect-ratio:1/1}
+.matrix{display:grid;grid-template-columns:22px repeat(4,1fr);grid-template-rows:repeat(4,1fr) 22px;gap:3px;width:min(240px,62vw);aspect-ratio:1/1}
 .cell{border-radius:2px;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:2px;font-family:var(--cond);font-weight:700;font-size:13px}
 .ax{font-size:12px;color:var(--ink-soft);display:flex;align-items:center;justify-content:center;font-family:var(--cond)}
 .pin{background:var(--ink);color:var(--bg);border-radius:10px;padding:0 6px;line-height:18px}
 .legend{font-size:13px;color:var(--ink-soft);line-height:1.6}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
-@media (max-width:520px){.matrix-wrap{grid-template-columns:1fr}.matrix{width:100%;max-width:300px}}
-
+@media (max-width:520px){.matrix-wrap{grid-template-columns:1fr}.matrix{width:100%;max-width:280px}}
 .danger{border-top:1px solid var(--line);padding:12px 0}
 .danger:first-of-type{border-top:0;padding-top:0}
 .dhead{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
@@ -125,7 +129,6 @@ textarea{min-height:110px;resize:vertical}
 .badge{font-family:var(--cond);font-weight:700;font-size:15px;padding:2px 8px;border-radius:3px;white-space:nowrap}
 .fam{font-size:13px;color:var(--ink-soft)}
 .danger p{margin:6px 0 0;font-size:15px}
-
 ul.clean{margin:0;padding-left:20px}
 ul.clean li{margin-bottom:6px}
 .mesure{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:15px}
@@ -135,31 +138,103 @@ ul.clean li{margin-bottom:6px}
 @media (max-width:520px){.mesure{grid-template-columns:1fr;gap:2px}}
 .disclaimer{font-size:13px;color:var(--ink-soft);margin:6px 0 14px}
 
-/* Registre */
-.reg-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:22px 0 12px}
-.reg-head h2{font-family:var(--cond);font-weight:600;font-size:26px;margin:0}
+/* Listes */
 .entry{background:var(--surface);border-radius:4px;margin-bottom:10px;overflow:hidden;border-left:6px solid var(--line)}
-.entry summary{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px 12px 10px 10px;cursor:pointer;list-style:none}
-.entry summary::-webkit-details-marker{display:none}
-.entry .eimg{width:64px;height:64px;border-radius:3px;object-fit:cover;background:var(--line)}
-.entry .etitle{font-weight:600;font-size:16px;line-height:1.25}
-.entry .emeta{font-size:13px;color:var(--ink-soft)}
-.entry .ebody{padding:0 12px 14px}
-.entry .erow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 14px}
-.entry select{width:auto;padding:6px 10px}
-.empty{padding:40px 16px;text-align:center;color:var(--ink-soft)}
-.empty .btn{margin-top:12px}
-.stat{display:inline-block;font-size:13px;font-weight:600;padding:2px 8px;border-radius:3px;border:1px solid var(--ink-soft)}
+.entry>summary{display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;padding:10px 12px 10px 10px;cursor:pointer;list-style:none}
+.entry>summary::-webkit-details-marker{display:none}
+.eimg{width:60px;height:60px;border-radius:3px;object-fit:cover;background:var(--line);display:block}
+.etitle{font-weight:600;font-size:16px;line-height:1.25}
+.emeta{font-size:13px;color:var(--ink-soft)}
+.eright{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.ebody{padding:4px 12px 14px}
+.sec{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.sec>h4{font-family:var(--cond);font-weight:600;font-size:19px;margin:0 0 8px}
+.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:12px;white-space:nowrap;border:1px solid var(--ink-soft);color:var(--ink)}
+.chip.st-ouvert{border-color:var(--r3);background:var(--r3-bg)}
+.chip.st-encours{border-color:var(--r2);background:var(--r2-bg)}
+.chip.st-cloture{border-color:var(--r1);background:var(--r1-bg)}
+.chip.st-pending{border-style:dashed;color:var(--ink-soft)}
+.chip.st-error{border-color:var(--r4);background:var(--r4-bg)}
+.flag{font-size:12px;font-weight:600;color:var(--r4)}
+.flag.soft{color:var(--ink-soft)}
+.empty{padding:36px 16px;text-align:center;color:var(--ink-soft)}
+.actlist{list-style:none;margin:0;padding:0}
+.actlist li{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
+.tick{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-soft);display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:2px}
+.tick.done{background:var(--r1);border-color:var(--r1);color:#fff}
+.msg{background:var(--surface-2);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.photos{display:flex;flex-wrap:wrap;gap:8px}
+.photos img{width:110px;height:110px;object-fit:cover;border-radius:4px;cursor:zoom-in;background:var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.row>select{width:auto}
+
+/* Filtres */
+.filters{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.filters select{padding:8px 10px}
+@media (max-width:560px){.filters{grid-template-columns:1fr 1fr}}
+.reg-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px 0 12px;font-size:14px;color:var(--ink-soft)}
+
+/* Tableau de bord */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+@media (max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--surface);border-radius:4px;padding:12px;border-top:4px solid var(--line)}
+.kpi b{display:block;font-family:var(--cond);font-weight:700;font-size:34px;line-height:1}
+.kpi span{font-size:13px;color:var(--ink-soft)}
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:minmax(90px,170px) 1fr 34px;gap:10px;align-items:center;font-size:14px}
+.bar .track{height:14px;background:var(--surface-2);border-radius:2px;overflow:hidden}
+.bar .fill{height:100%;background:var(--ink)}
+.bar .n{font-family:var(--cond);font-weight:700;text-align:right}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;align-items:end;height:120px}
+.months div{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:11px;color:var(--ink-soft)}
+.months i{display:block;width:100%;background:var(--ink);border-radius:2px 2px 0 0;min-height:2px}
+.months b{font-family:var(--cond);font-size:13px;color:var(--ink)}
+.prio{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);cursor:pointer;background:none;border-left:0;border-right:0;border-bottom:0;width:100%;text-align:left}
+.prio:first-of-type{border-top:0}
+.dash-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.dash-head select{width:auto}
+
+/* Éditeur */
+.edrow{background:var(--surface-2);border-radius:4px;padding:10px;margin-bottom:8px}
+.edgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.edgrid{grid-template-columns:1fr}}
+.edrow label{display:block;font-size:13px;font-weight:600}
+.edrow input,.edrow select,.edrow textarea{margin-top:2px;padding:8px 10px}
+.edrow textarea{min-height:60px}
+
+/* Navigation basse */
+.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px)}
+.bottomnav .in{display:flex;width:100%;max-width:780px}
+.navbtn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:var(--nav-h);border:0;background:none;color:var(--ink-soft);font-size:12px;font-weight:600;cursor:pointer;border-top:3px solid transparent;position:relative}
+.navbtn svg{width:24px;height:24px}
+.navbtn[aria-current="page"]{color:var(--ink);border-top-color:var(--brand)}
+.navbtn .count{position:absolute;top:6px;left:calc(50% + 8px);background:var(--brand);color:#fff;font-size:11px;border-radius:9px;padding:0 5px;line-height:16px}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-h) + 16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:4px;font-size:15px;z-index:30;max-width:90vw}
+dialog.lightbox{border:0;padding:0;background:transparent;max-width:96vw;max-height:92vh}
+dialog.lightbox::backdrop{background:rgba(0,0,0,.85)}
+dialog.lightbox img{max-width:96vw;max-height:86vh;display:block;border-radius:4px}
+dialog.lightbox button{margin:8px auto 0;display:block}
+.gate{max-width:420px;margin:28px auto 0}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <div class="brand">Vigie<small>Situations dangereuses et presqu'accidents</small></div>
-    <nav class="tabs" role="tablist" id="tabs" hidden>
-      <button class="tab" role="tab" id="tab-new" aria-selected="true" aria-controls="view-new">Signaler</button>
-      <button class="tab" role="tab" id="tab-reg" aria-selected="false" aria-controls="view-reg">Registre <span id="regCount"></span></button>
-    </nav>
+    <svg class="logo" role="img" aria-label="Les 2 Alpes" xmlns="http://www.w3.org/2000/svg" viewBox="145.5 136.2 667.5 280.3">
+<path fill-rule="nonzero" fill="#DB222E" d="M 148.16 188.43 L 158.35 188.43 C 160.99 188.43 163.25 189.33 165.14 191.12 C 167.03 192.91 167.98 195.13 167.98 197.77 L 167.98 285.78 L 148.16 285.78 Z M 148.16 188.43 "/>
+<path fill-rule="nonzero" fill="#DB222E" d="M 194.52 240.5 C 194.70 235.60 196.12 231.82 198.76 229.19 C 201.40 226.53 204.80 225.21 208.95 225.21 C 213.48 225.21 216.97 226.53 219.42 229.19 C 221.68 231.64 223.00 235.41 223.38 240.5 Z M 234.70 219 C 228.48 212.21 219.70 208.80 208.38 208.80 C 197.63 208.80 189.23 212.30 183.20 219.28 C 177.35 226.07 174.42 235.51 174.42 247.57 C 174.42 260.21 177.44 269.92 183.48 276.73 C 189.52 283.71 197.91 287.19 208.67 287.19 C 217.53 287.19 224.89 285.03 230.74 280.69 C 236.59 276.53 240.55 270.5 242.63 262.57 L 228.48 262.57 C 228.42 262.57 228.37 262.57 228.32 262.58 L 223.00 262.58 C 222.78 262.87 221.78 265.08 220.04 266.92 L 219.24 267.67 C 217.75 268.89 216.57 269.5 216.17 269.69 C 214.30 270.42 212.18 270.78 209.80 270.78 C 204.89 270.78 201.21 269.28 198.76 266.26 C 196.12 263.42 194.70 259.08 194.52 253.23 L 243.47 253.23 C 243.66 252.85 243.76 252.19 243.76 251.26 L 243.76 248.14 C 243.76 235.69 240.74 225.98 234.70 219 "/>
+<path fill-rule="nonzero" fill="#DB222E" d="M 288.43 239.65 L 283.05 238.52 C 273.24 236.44 268.34 233.90 268.34 230.88 C 268.34 228.61 269.19 226.92 270.89 225.78 C 272.77 224.65 275.60 224.08 279.37 224.08 C 283.33 224.08 286.45 224.94 288.71 226.63 C 289.51 227.36 290.08 228.01 290.76 228.90 C 290.86 229.07 290.98 229.22 291.08 229.39 C 291.52 230.43 291.80 231.60 291.94 232.87 L 311.30 232.87 L 311.30 232.85 C 311.30 232.85 311.27 232.84 311.27 232.84 C 310.71 225.70 307.83 219.85 302.58 215.31 C 296.73 210.98 288.90 208.80 279.09 208.80 C 270.03 208.80 262.68 210.98 257.02 215.31 C 251.54 220.03 248.81 225.98 248.81 233.14 C 248.81 238.80 250.69 243.33 254.47 246.73 C 257.87 250.12 264.56 253.05 274.56 255.50 C 276.26 256.07 278.81 256.63 282.21 257.19 C 290.13 258.89 294.09 261.44 294.09 264.84 C 294.09 267.10 292.96 268.89 290.69 270.21 C 288.24 271.53 285.32 272.19 281.92 272.19 C 277.20 272.19 273.43 271.25 270.60 269.37 C 268.40 267.79 267.10 265.52 266.60 262.63 L 247.16 262.63 C 247.35 270.48 250.05 276.51 255.32 280.69 C 260.60 285.03 268.62 287.19 279.37 287.19 C 290.69 287.19 299.19 285.12 304.84 280.97 C 310.88 276.44 313.90 270.03 313.90 261.72 C 313.90 256.07 312.10 251.53 308.52 248.14 C 304.75 244.93 298.05 242.10 288.43 239.65 "/>
+<path fill-rule="nonzero" fill="#DB222E" d="M 542.15 254.94 C 542.15 260.21 540.63 264.37 537.62 267.39 C 534.60 270.41 530.45 271.91 525.17 271.91 C 521.95 271.91 519.51 271.16 517.81 269.64 C 516.11 267.94 515.26 265.69 515.26 262.85 C 515.26 260.78 515.92 258.71 517.24 256.64 C 518.75 255.12 521.20 253.89 524.60 252.96 L 531.11 251.53 C 535.82 250.41 539.50 249.17 542.15 247.85 Z M 552.33 214.19 C 547.05 210.60 539.13 208.80 528.56 208.80 C 519.13 208.80 511.86 210.98 506.77 215.32 C 502.24 219.08 499.60 223.91 498.85 229.75 L 517.81 229.75 C 518.75 227.67 520.26 226.26 522.34 225.51 C 524.41 224.75 526.77 224.37 529.41 224.37 C 531.86 224.37 534.55 224.80 537.48 225.64 C 540.40 226.5 541.86 228.33 541.86 231.16 C 541.86 234.94 537.71 237.39 529.41 238.51 C 527.71 238.71 526.20 238.94 524.88 239.23 C 523.56 239.51 522.43 239.66 521.49 239.66 C 514.31 240.78 508.42 243.05 503.80 246.44 C 499.18 249.83 496.87 255.5 496.87 263.42 C 496.87 271.91 499.41 278 504.51 281.67 C 509.60 285.35 515.54 287.19 522.34 287.19 C 525.73 287.19 529.65 286.96 534.08 286.48 C 538.51 286.01 542.71 284.75 546.67 282.66 C 550.45 280.78 553.70 277.71 556.44 273.46 C 559.17 269.23 560.54 263.32 560.54 255.78 L 560.54 230.03 C 560.54 223.23 557.80 217.96 552.33 214.19 "/>
+<path fill-rule="nonzero" fill="#DB222E" d="M 568.87 188.43 L 579.06 188.43 C 581.70 188.43 583.96 189.33 585.85 191.12 C 587.73 192.91 588.68 195.13 588.68 197.77 L 588.68 285.78 L 568.87 285.78 Z M 568.87 188.43 "/>
+<path fill-rule="nonzero" fill="#DB222E" d="M 692.34 240.5 C 692.52 235.60 693.94 231.82 696.58 229.19 C 699.22 226.53 702.62 225.21 706.77 225.21 C 711.30 225.21 714.78 226.53 717.24 229.19 C 719.50 231.64 720.82 235.41 721.20 240.5 Z M 732.52 219 C 726.29 212.21 717.52 208.80 706.20 208.80 C 695.45 208.80 687.05 212.30 681.02 219.28 C 675.17 226.07 672.25 235.51 672.25 247.57 C 672.25 260.21 675.26 269.92 681.30 276.73 C 687.34 283.71 695.73 287.19 706.49 287.19 C 715.35 287.19 722.71 285.03 728.56 280.69 C 734.40 276.53 738.37 270.5 740.44 262.57 L 726.29 262.57 C 726.24 262.57 726.19 262.57 726.14 262.58 L 720.81 262.58 C 720.60 262.87 719.60 265.08 717.86 266.92 L 717.06 267.67 C 715.57 268.89 714.39 269.5 713.99 269.69 C 712.12 270.42 710.00 270.78 707.62 270.78 C 702.71 270.78 699.03 269.28 696.58 266.26 C 693.94 263.42 692.52 259.08 692.34 253.23 L 741.29 253.23 C 741.48 252.85 741.58 252.19 741.58 251.26 L 741.58 248.14 C 741.58 235.69 738.56 225.98 732.52 219 "/>
+<path fill-rule="nonzero" fill="#DB222E" d="M 786.25 239.65 L 780.87 238.52 C 771.06 236.44 766.16 233.90 766.16 230.88 C 766.16 228.61 767.01 226.92 768.70 225.78 C 770.59 224.65 773.42 224.08 777.19 224.08 C 781.16 224.08 784.27 224.94 786.53 226.63 C 787.33 227.36 787.91 228.01 788.58 228.90 C 788.68 229.07 788.80 229.22 788.90 229.39 C 789.34 230.43 789.62 231.60 789.76 232.87 L 809.12 232.87 L 809.12 232.85 L 809.09 232.84 C 808.53 225.70 805.65 219.85 800.40 215.31 C 794.55 210.98 786.72 208.80 776.91 208.80 C 767.85 208.80 760.5 210.98 754.84 215.31 C 749.36 220.03 746.63 225.98 746.63 233.14 C 746.63 238.80 748.52 243.33 752.29 246.73 C 755.69 250.12 762.38 253.05 772.39 255.50 C 774.08 256.07 776.63 256.63 780.02 257.19 C 787.95 258.89 791.91 261.44 791.91 264.84 C 791.91 267.10 790.78 268.89 788.51 270.21 C 786.06 271.53 783.14 272.19 779.74 272.19 C 775.02 272.19 771.25 271.25 768.42 269.37 C 766.21 267.79 764.92 265.52 764.42 262.63 L 744.98 262.63 C 745.17 270.48 747.87 276.51 753.14 280.69 C 758.42 285.03 766.44 287.19 777.19 287.19 C 788.51 287.19 797.00 285.12 802.66 280.97 C 808.70 276.44 811.72 270.03 811.72 261.72 C 811.72 256.07 809.92 251.53 806.34 248.14 C 802.57 244.93 795.87 242.10 786.25 239.65 "/>
+<path fill-rule="nonzero" fill="#DB222E" d="M 644.33 264.55 C 641.50 268.51 637.63 270.5 632.73 270.5 C 627.45 270.5 623.39 268.51 620.56 264.55 C 617.73 260.98 616.32 255.60 616.32 248.42 C 616.32 240.69 617.64 235.03 620.28 231.44 C 623.11 227.48 627.07 225.51 632.16 225.51 C 637.44 225.51 641.50 227.48 644.33 231.44 C 647.16 235.41 648.58 241.07 648.58 248.42 C 648.58 255.21 647.16 260.60 644.33 264.55 M 663.48 225.51 L 663.49 225.51 C 663.49 225.51 662.30 222.05 658.72 218.28 C 658.54 218.08 658.36 217.91 658.17 217.71 C 658.06 217.60 657.94 217.48 657.82 217.37 C 657.60 217.17 657.37 216.94 657.14 216.73 C 651.66 211.85 641.93 207.12 625.35 209.28 C 606.82 211.71 600.35 225.44 598.14 236.19 C 597.68 238.60 597.07 242.89 597.07 248.89 L 597.07 313.51 L 606.69 313.51 C 609.33 313.51 611.60 312.57 613.49 310.69 C 615.37 308.80 616.32 306.53 616.32 303.89 L 616.32 275.87 C 618.58 279.83 621.60 282.76 625.37 284.64 C 628.95 286.35 633.11 287.19 637.83 287.19 C 646.69 287.19 653.95 283.62 659.61 276.44 C 665.27 269.08 668.11 259.46 668.11 247.58 C 668.11 239.10 666.56 231.73 663.48 225.51 "/>
+<path fill-rule="nonzero" fill="#DB222E" d="M 414.96 275.12 C 404.99 275.12 395.47 273.42 386.73 270.31 L 386.73 270.30 C 385.98 270.04 385.44 269.34 385.44 268.53 C 385.44 267.48 386.32 266.63 387.41 266.63 C 387.53 266.63 387.64 266.64 387.76 266.66 C 387.77 266.66 387.80 266.67 387.83 266.67 C 392.96 267.63 398.30 268.13 403.76 268.13 C 445.37 268.13 475.42 239.05 475.42 203.19 C 475.42 167.32 445.37 138.24 403.76 138.24 C 403.75 138.24 403.75 138.24 403.74 138.24 C 362.07 138.24 328.28 167.78 328.28 208.94 L 328.30 208.94 C 328.30 209.01 328.30 209.08 328.30 209.16 C 328.42 227.03 343.45 241.49 361.98 241.49 C 380.59 241.49 395.68 226.91 395.68 208.94 C 395.68 192.65 383.29 179.18 367.11 176.80 C 366.17 176.66 365.46 175.87 365.46 174.92 C 365.46 173.87 366.34 173.02 367.42 173.02 C 367.51 173.02 367.59 173.03 367.67 173.03 C 388.47 175.49 404.57 192.62 404.57 213.37 C 404.57 227.72 396.88 240.32 385.25 247.55 C 377.29 252.41 361.16 258.80 350.64 267.31 C 338.32 276.89 330.44 291.57 330.44 308.03 C 330.44 314.58 331.69 320.85 333.97 326.62 C 336.96 334.36 344.87 338.20 350.89 338.5 L 350.89 338.50 C 351.14 338.51 351.40 338.52 351.65 338.52 C 358.66 338.52 364.33 333.03 364.33 326.27 C 364.33 321.02 360.92 316.57 356.11 314.84 L 356.11 314.84 C 352.49 313.55 349.91 310.19 349.91 306.25 C 349.91 301.19 354.16 297.09 359.39 297.09 C 361.28 297.09 363.04 297.62 364.51 298.53 C 370.15 301.37 375.20 305.14 379.46 309.62 C 385.12 315.72 396.52 329.03 406.39 335.48 C 413.5 340.24 422.13 343.03 431.44 343.03 C 455.73 343.03 475.42 324.02 475.42 300.55 L 475.42 248.60 C 461.37 264.74 439.52 275.12 414.96 275.12 "/>
+<path fill-rule="nonzero" fill="#DB222E" d="M 700.58 365.67 C 697.41 364.01 693.79 363.16 690.06 363.12 L 689.10 363.12 C 685.37 363.16 681.75 364.01 678.54 365.67 C 675.37 367.30 673.19 370.30 673.19 373.99 C 673.19 377.67 675.37 380.65 678.54 382.30 C 681.75 383.91 685.37 384.78 689.10 384.82 L 690.06 384.82 C 693.79 384.78 697.41 383.91 700.58 382.30 C 703.79 380.65 705.97 377.67 705.97 373.99 C 705.97 370.30 703.79 367.30 700.58 365.67 M 765.97 390.60 C 765.97 390.96 765.80 391.12 765.45 391.12 L 759.45 391.12 C 759.21 391.12 758.97 391.05 758.79 390.89 L 728.71 365.08 L 728.71 390.60 C 728.71 390.96 728.54 391.12 728.19 391.12 L 722.33 391.12 C 721.98 391.12 721.81 390.96 721.81 390.60 L 721.81 357.16 C 721.81 356.80 721.98 356.64 722.33 356.64 L 728.33 356.64 C 728.57 356.64 728.81 356.71 728.99 356.87 L 759.07 382.16 L 759.07 357.16 C 759.07 356.80 759.24 356.64 759.59 356.64 L 765.45 356.64 C 765.80 356.64 765.97 356.80 765.97 357.16 Z M 712.86 374.01 C 712.86 374.50 712.86 374.85 712.83 375.08 C 712.52 380.65 709.76 384.99 705.48 387.50 C 701.24 389.99 696.07 391.19 690.10 391.30 L 689.06 391.30 C 683.09 391.19 677.92 389.99 673.64 387.50 C 669.40 384.99 666.64 380.65 666.33 375.08 C 666.29 374.85 666.29 374.50 666.29 374.01 L 666.29 373.94 C 666.29 373.46 666.29 373.12 666.33 372.87 C 666.64 367.32 669.40 362.94 673.64 360.46 C 677.92 357.94 683.09 356.71 689.06 356.60 L 690.10 356.60 C 696.07 356.71 701.24 357.94 705.48 360.46 C 709.76 362.94 712.52 367.32 712.83 372.87 C 712.86 373.12 712.86 373.46 712.86 373.94 Z M 657.35 362.42 C 657.35 362.71 657.11 362.94 656.83 362.94 L 614.25 362.94 C 613.95 362.94 613.71 362.69 613.71 362.40 L 613.71 357.16 C 613.71 356.87 613.94 356.64 614.22 356.64 L 656.83 356.64 C 657.11 356.64 657.35 356.87 657.35 357.16 Z M 657.35 376.46 C 657.35 376.75 657.11 376.99 656.83 376.99 L 614.25 376.99 C 613.95 376.99 613.71 376.74 613.71 376.44 L 613.71 371.23 C 613.71 370.91 613.95 370.67 614.25 370.67 L 656.83 370.67 C 657.11 370.67 657.35 370.91 657.35 371.19 Z M 657.35 390.60 C 657.35 390.90 657.11 391.12 656.83 391.12 L 614.22 391.12 C 613.94 391.12 613.71 390.90 613.71 390.60 L 613.71 385.37 C 613.71 385.07 613.95 384.82 614.25 384.82 L 656.83 384.82 C 657.11 384.82 657.35 385.05 657.35 385.33 Z M 604.38 391.12 L 597.76 391.12 C 597.48 391.12 597.28 391.03 597.14 390.78 L 581.27 362.57 C 581.21 362.46 581.05 362.46 580.99 362.57 L 565.12 390.78 C 564.98 391.03 564.78 391.12 564.50 391.12 L 557.88 391.12 C 557.47 391.12 557.33 390.89 557.50 390.50 L 576.44 356.98 C 576.58 356.74 576.79 356.64 577.06 356.64 L 585.20 356.64 C 585.48 356.64 585.69 356.74 585.82 356.98 L 604.76 390.50 C 604.93 390.89 604.79 391.12 604.38 391.12 M 808.76 332.53 L 549.46 332.53 C 547.81 332.53 546.28 333.41 545.47 334.85 L 502.67 410.62 C 501.54 412.60 502.98 415.07 505.27 415.07 L 808.76 415.07 C 810.45 415.07 811.82 413.71 811.82 412.01 L 811.82 335.58 C 811.82 333.90 810.45 332.53 808.76 332.53 M 700.58 365.67 C 697.41 364.01 693.79 363.16 690.06 363.12 L 689.10 363.12 C 685.37 363.16 681.75 364.01 678.54 365.67 C 675.37 367.30 673.19 370.30 673.19 373.99 C 673.19 377.67 675.37 380.65 678.54 382.30 C 681.75 383.91 685.37 384.78 689.10 384.82 L 690.06 384.82 C 693.79 384.78 697.41 383.91 700.58 382.30 C 703.79 380.65 705.97 377.67 705.97 373.99 C 705.97 370.30 703.79 367.30 700.58 365.67 M 700.58 365.67 C 697.41 364.01 693.79 363.16 690.06 363.12 L 689.10 363.12 C 685.37 363.16 681.75 364.01 678.54 365.67 C 675.37 367.30 673.19 370.30 673.19 373.99 C 673.19 377.67 675.37 380.65 678.54 382.30 C 681.75 383.91 685.37 384.78 689.10 384.82 L 690.06 384.82 C 693.79 384.78 697.41 383.91 700.58 382.30 C 703.79 380.65 705.97 377.67 705.97 373.99 C 705.97 370.30 703.79 367.30 700.58 365.67 "/>
+</svg>
+    <div class="appname">Vigie<small>Remontées terrain HSE</small></div>
+    <span class="netchip" id="netChip" hidden></span>
   </header>
 
   <p class="notice" id="aiNotice" hidden></p>
@@ -172,118 +247,170 @@ ul.clean li{margin-bottom:6px}
       <label class="field"><span>Votre nom</span><input type="text" id="gName" autocomplete="name" placeholder="Prénom Nom"></label>
       <label class="field"><span>Code d'accès</span><input type="password" id="gCode" autocomplete="current-password"></label>
       <p class="notice" id="gErr" hidden></p>
-      <button type="button" class="btn primary" id="gBtn" style="width:100%">Entrer</button>
+      <button type="button" class="btn block" id="gBtn">Entrer</button>
     </div>
   </section>
 
   <main id="app" hidden>
-  <section id="view-new" role="tabpanel" aria-labelledby="tab-new">
-    <form id="form" novalidate>
-      <fieldset class="step">
-        <h2>Ce qui s'est passé</h2>
-        <div class="seg">
-          <input type="radio" name="type" id="t-sd" value="Situation dangereuse" checked>
-          <label for="t-sd"><b>Situation dangereuse</b><span>Un danger est présent, rien ne s'est produit</span></label>
-          <input type="radio" name="type" id="t-pa" value="Presque accident">
-          <label for="t-pa"><b>Presque accident</b><span>Un événement a eu lieu, sans blessé</span></label>
-        </div>
-      </fieldset>
-
-      <fieldset class="step">
-        <h2>Photos</h2>
-        <p class="hint">Cadrez le danger. Évitez les visages et les plaques d'immatriculation.</p>
-        <div class="drop" id="drop">
-          <div class="addbtns" id="addBtns">
-            <button type="button" class="addphoto" id="btnCam">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
-              Appareil photo
-            </button>
-            <button type="button" class="addphoto" id="btnGal">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><circle cx="9" cy="10" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg>
-              Galerie
-            </button>
+    <!-- Signaler -->
+    <section id="view-new">
+      <h1 class="view-title">Signaler</h1>
+      <p class="view-sub">Une situation dangereuse ou un presque accident. Fonctionne aussi sans réseau.</p>
+      <div id="result" hidden></div>
+      <form id="form" novalidate>
+        <fieldset class="step" style="padding-top:8px">
+          <h2>Ce qui s'est passé</h2>
+          <div class="seg">
+            <input type="radio" name="type" id="t-sd" value="Situation dangereuse" checked>
+            <label for="t-sd"><b>Situation dangereuse</b><span>Un danger est présent, rien ne s'est produit</span></label>
+            <input type="radio" name="type" id="t-pa" value="Presque accident">
+            <label for="t-pa"><b>Presque accident</b><span>Un événement a eu lieu, sans blessé</span></label>
           </div>
-        </div>
-        <input type="file" id="camInput" accept="image/*" capture="environment" hidden>
-        <input type="file" id="galInput" accept="image/*" multiple hidden>
-      </fieldset>
+        </fieldset>
 
-      <fieldset class="step">
-        <h2>Où</h2>
-        <label class="field"><span>Secteur</span>
-          <select id="secteur">
-            <option>Remontées mécaniques</option>
-            <option>Damage</option>
-            <option>Pistes et sécurité des pistes</option>
-            <option>Ateliers et garages</option>
-            <option>Neige de culture</option>
-            <option>Restauration</option>
-            <option>Accueil, ventes, bâtiments</option>
-            <option>Activités d'été (VTT, luge, randonnée)</option>
-            <option>Autre</option>
-          </select>
-        </label>
-        <label class="field"><span>Lieu précis</span>
-          <input type="text" id="lieu" placeholder="Ex. gare de départ du Jandri 1, quai d'embarquement">
-        </label>
-      </fieldset>
-
-      <fieldset class="step">
-        <h2>Expliquer à l'oral</h2>
-        <p class="hint">Racontez ce que vous avez vu, où, et ce qui aurait pu arriver. L'IA écoute la note et l'intègre à l'analyse. 2 minutes maximum.</p>
-        <div id="voiceBox">
-          <button type="button" class="mic" id="recBtn" aria-pressed="false">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>
-            <span id="recLbl">Enregistrer une note vocale</span>
-            <span class="timer" id="recTimer" hidden>0:00</span>
-          </button>
-          <div class="voice" id="voicePlayer" hidden>
-            <audio id="voiceAudio" controls preload="metadata"></audio>
-            <span class="timer" id="voiceDur"></span>
-            <button type="button" class="btn ghost small" id="voiceDel">Supprimer</button>
+        <fieldset class="step">
+          <h2>Photos</h2>
+          <p class="hint">Cadrez le danger. Évitez les visages et les plaques d'immatriculation.</p>
+          <div class="drop" id="drop">
+            <div class="addbtns" id="addBtns">
+              <button type="button" class="addphoto" id="btnCam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+                Appareil photo
+              </button>
+              <button type="button" class="addphoto" id="btnGal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><circle cx="9" cy="10" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg>
+                Galerie
+              </button>
+            </div>
           </div>
+          <input type="file" id="camInput" accept="image/*" capture="environment" hidden>
+          <input type="file" id="galInput" accept="image/*" multiple hidden>
+        </fieldset>
+
+        <fieldset class="step">
+          <h2>Où</h2>
+          <label class="field"><span>Secteur</span>
+            <select id="secteur">
+              <option>Remontées mécaniques</option>
+              <option>Damage</option>
+              <option>Pistes et sécurité des pistes</option>
+              <option>Ateliers et garages</option>
+              <option>Neige de culture</option>
+              <option>Restauration</option>
+              <option>Accueil, ventes, bâtiments</option>
+              <option>Activités d'été (VTT, luge, randonnée)</option>
+              <option>Autre</option>
+            </select>
+          </label>
+          <label class="field"><span>Lieu précis</span>
+            <input type="text" id="lieu" placeholder="Ex. gare de départ du Jandri 1, quai d'embarquement">
+          </label>
+        </fieldset>
+
+        <fieldset class="step">
+          <h2>Expliquer à l'oral</h2>
+          <p class="hint">Racontez ce que vous avez vu, où, et ce qui aurait pu arriver. 2 minutes maximum.</p>
+          <div id="voiceBox">
+            <button type="button" class="mic" id="recBtn" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>
+              <span id="recLbl">Enregistrer une note vocale</span>
+              <span class="timer" id="recTimer" hidden>0:00</span>
+            </button>
+            <div class="voice" id="voicePlayer" hidden>
+              <audio id="voiceAudio" controls preload="metadata"></audio>
+              <span class="timer" id="voiceDur"></span>
+              <button type="button" class="btn ghost small" id="voiceDel">Supprimer</button>
+            </div>
+          </div>
+          <p class="miclive" id="recMsg" aria-live="polite"></p>
+        </fieldset>
+
+        <fieldset class="step">
+          <h2>Ou par écrit</h2>
+          <p class="hint">Les faits, sans chercher de coupable. Facultatif si vous avez laissé une note vocale.</p>
+          <textarea id="desc" placeholder="Ex. Plaque de verglas sur l'escalier d'accès au local technique, pas de main courante côté droit."></textarea>
+        </fieldset>
+
+        <div class="submitbar">
+          <button type="submit" class="btn block" id="sendBtn">Envoyer la remontée</button>
         </div>
-        <p class="miclive" id="recMsg" aria-live="polite"></p>
-      </fieldset>
+      </form>
+    </section>
 
-      <fieldset class="step">
-        <h2>Ou par écrit</h2>
-        <p class="hint">Les faits, sans chercher de coupable. Facultatif si vous avez laissé une note vocale.</p>
-        <textarea id="desc" placeholder="Ex. Plaque de verglas sur l'escalier d'accès au local technique, pas de main courante côté droit."></textarea>
-      </fieldset>
+    <!-- Mes envois -->
+    <section id="view-mine" hidden>
+      <h1 class="view-title">Mes envois</h1>
+      <p class="view-sub">Vos remontées et les actions mises en place par le service QSE.</p>
+      <div id="mineList"></div>
+      <p class="hint" style="margin-top:20px">Connecté en tant que <b id="whoami"></b>. <button class="linkbtn" id="logoutBtn">Changer d'utilisateur</button></p>
+    </section>
 
-      <div class="actions">
-        <button type="submit" class="btn primary" id="analyzeBtn">Analyser la situation</button>
+    <!-- Tableau de bord (admin) -->
+    <section id="view-dash" hidden>
+      <div class="dash-head">
+        <h1 class="view-title">Tableau de bord</h1>
+        <select id="dashPeriod" aria-label="Période">
+          <option value="30">30 derniers jours</option>
+          <option value="90">3 derniers mois</option>
+          <option value="365" selected>12 derniers mois</option>
+          <option value="all">Depuis le début</option>
+        </select>
       </div>
-    </form>
+      <div id="dash"></div>
+    </section>
 
-    <div class="result" id="result" hidden></div>
-  </section>
-
-  <section id="view-reg" role="tabpanel" aria-labelledby="tab-reg" hidden>
-    <div class="reg-head">
-      <h2>Registre</h2>
-      <div style="display:flex;gap:8px">
-        <button class="btn ghost small" id="refreshBtn">Actualiser</button>
-        <button class="btn ghost small" id="exportBtn" hidden>Exporter en CSV</button>
+    <!-- Registre (admin) -->
+    <section id="view-reg" hidden>
+      <h1 class="view-title">Registre</h1>
+      <div class="filters">
+        <select id="fStatut" aria-label="Statut">
+          <option value="">Tous les statuts</option>
+          <option value="actifs">Non clôturées</option>
+          <option>Ouvert</option><option>En cours</option><option>Clôturé</option>
+        </select>
+        <select id="fNiveau" aria-label="Niveau de risque">
+          <option value="">Tous les niveaux</option>
+          <option value="4">Critique</option><option value="3">Important</option><option value="2">Modéré</option><option value="1">Faible</option>
+          <option value="erreur">Analyse à relancer</option>
+        </select>
+        <select id="fSecteur" aria-label="Secteur"><option value="">Tous les secteurs</option></select>
       </div>
-    </div>
-    <div id="regList"></div>
-    <p class="hint" style="margin-top:20px">Connecté en tant que <b id="whoami"></b>. <button class="linkbtn" id="logoutBtn">Changer d'utilisateur</button></p>
-  </section>
+      <input type="search" id="fQ" placeholder="Rechercher (lieu, déclarant, danger…)">
+      <div class="reg-tools"><span id="regInfo"></span>
+        <span class="row"><button class="btn ghost small" id="refreshBtn">Actualiser</button><button class="btn ghost small" id="exportBtn">Exporter CSV</button></span>
+      </div>
+      <div id="regList"></div>
+    </section>
   </main>
 </div>
+
+<nav class="bottomnav" id="nav" hidden aria-label="Navigation">
+  <div class="in">
+    <button class="navbtn" data-view="new" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4M12 17.2v.3"/></svg>Signaler</button>
+    <button class="navbtn" data-view="mine">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/></svg>Mes envois<span class="count" id="navCount" hidden></span></button>
+    <button class="navbtn admin-only" data-view="dash" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Tableau de bord</button>
+    <button class="navbtn admin-only" data-view="reg" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>Registre</button>
+  </div>
+</nav>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<dialog class="lightbox" id="lightbox"><img alt=""><button class="btn small" id="lbClose">Fermer</button></dialog>
 
 <script>
 (() => {
   // ====== CONFIGURATION ======
-  // Remplacez par l'adresse de votre Worker Cloudflare (étape 3 du guide)
   const API_URL = 'https://analyseia.hbouget2.workers.dev';
   // ===========================
 
-  const SESSION_KEY = 'vigie.session.v1';
-  const MAX_PHOTOS = 4;
+  const SESSION_KEY = 'vigie.session.v1', UIDS_KEY = 'vigie.uids.v1';
+  const MAX_PHOTOS = 4, MAX_REC_S = 120;
   const NIVEAUX = ['Suppression','Substitution','Protection collective','Organisationnel','EPI','Information / formation'];
+  const FAMILLES = ['Chute de hauteur','Chute de plain-pied','Manutention / TMS','Circulation / engins','Machines et équipements','Électrique','Incendie / explosion','Chimique','Ambiances climatiques (froid, UV, altitude)','Milieu montagne (avalanche, chute de pierres)','Bruit / vibrations','Co-activité / entreprise extérieure','Organisation / psychosocial','Autre'];
+  const STATUTS = ['Ouvert','En cours','Clôturé'];
   const G_LBL = ['','Bénigne','Sérieuse','Grave','Très grave'];
   const P_LBL = ['','Improbable','Rare','Probable','Fréquente'];
   const BAND_LBL = ['','Faible','Modéré','Important','Critique'];
@@ -292,36 +419,52 @@ ul.clean li{margin-bottom:6px}
   const el = (tag, attrs = {}, ...kids) => {
     const n = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs)) {
+      if (v == null || v === false) continue;
       if (k === 'class') n.className = v;
       else if (k === 'text') n.textContent = v;
       else if (k === 'style') n.setAttribute('style', v);
       else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
-      else n.setAttribute(k, v);
+      else if (k === 'value') n.value = v;
+      else n.setAttribute(k, v === true ? '' : v);
     }
-    for (const kid of kids) if (kid != null) n.append(kid);
+    for (const kid of kids) if (kid != null && kid !== false) n.append(kid);
     return n;
   };
   const band = c => c >= 12 ? 4 : c >= 8 ? 3 : c >= 4 ? 2 : 1;
-  const bandColors = b => ({bg:`var(--r${b}-bg)`, fg:`var(--r${b})`});
+  const bandColors = b => ({ bg:`var(--r${b}-bg)`, fg:`var(--r${b})` });
+  const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  const fmtDate = d => new Date(d).toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit', year:'numeric' });
+  const fmtDateTime = d => new Date(d).toLocaleString('fr-FR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+  const daysSince = d => Math.floor((Date.now() - new Date(d)) / 86400000);
+  const stClass = s => ({ 'Ouvert':'st-ouvert', 'En cours':'st-encours', 'Clôturé':'st-cloture' }[s] || '');
   const notice = msg => { const n = $('#aiNotice'); n.textContent = msg || ''; n.hidden = !msg; };
+  let toastT;
+  const toast = msg => { const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3500); };
 
   // ---------- Session et API ----------
   let session = null;
-  const loadSession = () => { try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch { return null; } };
-  const saveSession = s => { try { s ? localStorage.setItem(SESSION_KEY, JSON.stringify(s)) : localStorage.removeItem(SESSION_KEY); } catch {} };
+  const readJSON = (k, def) => { try { return JSON.parse(localStorage.getItem(k)) ?? def; } catch { return def; } };
+  const writeJSON = (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+  const uidFor = name => {
+    const map = readJSON(UIDS_KEY, {}); const key = name.trim().toLowerCase();
+    if (!map[key]) { map[key] = 'u' + newId(); writeJSON(UIDS_KEY, map); }
+    return map[key];
+  };
+  const isAdmin = () => session?.role === 'admin';
 
-  async function api(path, { method = 'GET', body, signal } = {}) {
+  async function api(path, { method = 'GET', body, signal, raw } = {}) {
     let r;
     try {
       r = await fetch(API_URL + path, {
         method, signal,
-        headers: { 'Content-Type': 'application/json', 'X-Access-Code': session?.code || '' },
+        headers: { 'Content-Type': 'application/json', 'X-Access-Code': session?.code || '', 'X-User-Id': session?.uid || '' },
         body: body ? JSON.stringify(body) : undefined,
       });
     } catch (e) {
       if (e?.name === 'AbortError') throw { status: 0, aborted: true };
-      throw { status: 0, message: 'Serveur injoignable. Vérifiez votre connexion.' };
+      throw { status: 0, offline: true, message: 'Pas de connexion au serveur.' };
     }
+    if (r.ok && raw) return r;
     let data = null;
     try { data = await r.json(); } catch {}
     if (!r.ok) {
@@ -332,20 +475,24 @@ ul.clean li{margin-bottom:6px}
   }
 
   function showGate(msg) {
-    $('#gate').hidden = false; $('#app').hidden = true; $('#tabs').hidden = true;
-    $('#gName').value = session?.name || loadSession()?.name || '';
+    $('#gate').hidden = false; $('#app').hidden = true; $('#nav').hidden = true; $('#netChip').hidden = true;
+    $('#gName').value = session?.name || readJSON(SESSION_KEY, {})?.name || '';
     $('#gErr').textContent = msg || ''; $('#gErr').hidden = !msg;
   }
   function showApp() {
-    $('#gate').hidden = true; $('#app').hidden = false; $('#tabs').hidden = false;
-    $('#whoami').textContent = session.name + (session.role === 'admin' ? ' (administrateur)' : '');
-    loadRegistre();
+    $('#gate').hidden = true; $('#app').hidden = false; $('#nav').hidden = false;
+    document.querySelectorAll('.admin-only').forEach(b => b.hidden = !isAdmin());
+    $('#whoami').textContent = session.name + (isAdmin() ? ' (administrateur)' : '');
+    showView('new');
+    updateNet();
+    processQueue();
+    if (isAdmin()) loadAll();
   }
   async function enter(name, code) {
-    session = { name, code };
+    session = { name, code, uid: uidFor(name) };
     const r = await api('/api/ping');
     session.role = r.role;
-    saveSession(session);
+    writeJSON(SESSION_KEY, session);
     showApp();
   }
   $('#gBtn').onclick = async () => {
@@ -353,49 +500,125 @@ ul.clean li{margin-bottom:6px}
     if (!name || !code) { $('#gErr').textContent = 'Renseignez votre nom et le code.'; $('#gErr').hidden = false; return; }
     $('#gBtn').disabled = true;
     try { await enter(name, code); $('#gCode').value = ''; }
-    catch (e) { showGate(e.status === 401 ? "Code d'accès incorrect." : (e.message || 'Connexion impossible.')); }
+    catch (e) { showGate(e.status === 401 ? "Code d'accès incorrect." : e.offline ? (navigator.onLine ? "Le serveur ne répond pas. Réessayez dans un instant ; si ça persiste, prévenez le service QSE." : 'Pas de réseau. La première connexion doit se faire avec du réseau.') : (e.message || 'Connexion impossible.')); }
     finally { $('#gBtn').disabled = false; }
   };
   $('#gCode').addEventListener('keydown', e => { if (e.key === 'Enter') $('#gBtn').click(); });
-  $('#logoutBtn').onclick = () => { const name = session?.name; session = null; saveSession({ name }); showGate(); };
+  $('#logoutBtn').onclick = () => { const name = session?.name; session = null; writeJSON(SESSION_KEY, { name }); showGate(); };
 
-  // ---------- Onglets ----------
-  const showTab = which => {
-    const isNew = which === 'new';
-    $('#tab-new').setAttribute('aria-selected', isNew);
-    $('#tab-reg').setAttribute('aria-selected', !isNew);
-    $('#view-new').hidden = !isNew;
-    $('#view-reg').hidden = isNew;
-    if (!isNew) loadRegistre();
-  };
-  $('#tab-new').onclick = () => showTab('new');
-  $('#tab-reg').onclick = () => showTab('reg');
+  // ---------- Navigation ----------
+  let currentView = 'new';
+  function showView(v) {
+    if ((v === 'dash' || v === 'reg') && !isAdmin()) v = 'new';
+    currentView = v;
+    for (const id of ['new','mine','dash','reg']) $('#view-' + id).hidden = id !== v;
+    document.querySelectorAll('.navbtn').forEach(b => b.dataset.view === v ? b.setAttribute('aria-current', 'page') : b.removeAttribute('aria-current'));
+    window.scrollTo({ top: 0 });
+    if (v === 'mine') { renderMine(); loadMine(); }
+    if (v === 'dash') { renderDash(); loadAll(); }
+    if (v === 'reg') { renderReg(); loadAll(); }
+  }
+  document.querySelectorAll('.navbtn').forEach(b => b.onclick = () => showView(b.dataset.view));
+
+  // ---------- File d'attente hors ligne (IndexedDB) ----------
+  let dbp = null;
+  const idb = () => dbp || (dbp = new Promise((res, rej) => {
+    const r = indexedDB.open('vigie', 1);
+    r.onupgradeneeded = () => r.result.createObjectStore('queue', { keyPath: 'id' });
+    r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+  }));
+  const tx = async (mode, fn) => { const db = await idb(); return new Promise((res, rej) => {
+    const t = db.transaction('queue', mode); const st = t.objectStore('queue'); const out = fn(st);
+    t.oncomplete = () => res(out?.result); t.onerror = () => rej(t.error);
+  }); };
+  const qAll = () => tx('readonly', st => st.getAll()).then(r => (r || []).sort((a, b) => a.date.localeCompare(b.date)));
+  const qPut = item => tx('readwrite', st => st.put(item));
+  const qDel = id => tx('readwrite', st => st.delete(id));
+
+  let queueCount = 0;
+  async function updateNet() {
+    let q = [];
+    try { q = await qAll(); } catch {}
+    queueCount = q.filter(x => x.declarant_id === session?.uid).length;
+    const chip = $('#netChip');
+    if (!session) { chip.hidden = true; return; }
+    if (!navigator.onLine) { chip.className = 'netchip off'; chip.textContent = queueCount ? `Hors ligne · ${queueCount} en attente` : 'Hors ligne'; chip.hidden = false; }
+    else if (queueCount) { chip.className = 'netchip wait'; chip.textContent = `${queueCount} en attente d'envoi`; chip.hidden = false; }
+    else chip.hidden = true;
+    const nc = $('#navCount'); nc.textContent = queueCount; nc.hidden = !queueCount;
+  }
+
+  let syncing = false;
+  async function processQueue() {
+    if (syncing || !session) return;
+    if (!navigator.onLine) { updateNet(); return; }
+    syncing = true;
+    let sent = 0;
+    try {
+      const items = (await qAll()).filter(x => x.status !== 'error');
+      for (const it of items) {
+        it.status = 'sending'; await qPut(it); if (currentView === 'mine') renderMine();
+        const { status, tries, error, ...payload } = it;
+        try {
+          await api('/api/submit', { method: 'POST', body: payload });
+          await qDel(it.id); sent++;
+        } catch (e) {
+          if (e.offline || e.status === 401 || e.status === 429 || e.status >= 500) {
+            it.status = 'pending'; it.tries = (it.tries || 0) + 1; await qPut(it); break;
+          }
+          it.status = 'error'; it.error = e.message || "L'envoi a été refusé."; await qPut(it);
+        }
+      }
+    } catch (e) { console.warn(e); }
+    finally {
+      syncing = false;
+      await updateNet();
+      if (sent) { toast(sent > 1 ? `${sent} remontées envoyées` : 'Remontée envoyée'); loadMine(); if (isAdmin()) loadAll(); }
+      else if (currentView === 'mine') renderMine();
+    }
+  }
+  window.addEventListener('online', () => { updateNet(); processQueue(); if (currentView === 'mine') loadMine(); });
+  window.addEventListener('offline', updateNet);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && session) { processQueue(); if (currentView === 'mine') loadMine(); } });
+  setInterval(() => { if (session && !document.hidden) processQueue(); }, 30000);
 
   // ---------- Photos ----------
   let photos = []; // {b64, url}
-  const toJpeg = (file, max = 1568, q = .85) => new Promise((res, rej) => {
-    const url = URL.createObjectURL(file);
+  const toJpeg = (src, max, q) => new Promise((res, rej) => {
+    const isFile = src instanceof Blob;
+    const url = isFile ? URL.createObjectURL(src) : src;
     const img = new Image();
     img.onload = () => {
       const r = Math.min(1, max / Math.max(img.width, img.height));
       const c = document.createElement('canvas');
       c.width = Math.round(img.width * r); c.height = Math.round(img.height * r);
       c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-      URL.revokeObjectURL(url);
+      if (isFile) URL.revokeObjectURL(url);
       res(c.toDataURL('image/jpeg', q));
     };
-    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('decode')); };
+    img.onerror = () => { if (isFile) URL.revokeObjectURL(url); rej(new Error('decode')); };
     img.src = url;
+  });
+  const makeThumb = src => new Promise(res => {
+    if (!src) return res(null);
+    const img = new Image();
+    img.onload = () => {
+      const s = 200, c = document.createElement('canvas');
+      const r = Math.max(s / img.width, s / img.height);
+      c.width = s; c.height = s;
+      c.getContext('2d').drawImage(img, (s - img.width*r)/2, (s - img.height*r)/2, img.width*r, img.height*r);
+      res(c.toDataURL('image/jpeg', .6));
+    };
+    img.onerror = () => res(null);
+    img.src = src;
   });
   const renderPhotos = () => {
     const drop = $('#drop');
     drop.querySelectorAll('.thumb').forEach(t => t.remove());
-    photos.forEach((p, i) => {
-      drop.insertBefore(el('div', {class:'thumb'},
-        el('img', {src:p.url, alt:`Photo ${i+1}`}),
-        el('button', {type:'button', 'aria-label':`Retirer la photo ${i+1}`, text:'×', onclick:() => { photos.splice(i,1); renderPhotos(); }})
-      ), $('#addBtns'));
-    });
+    photos.forEach((p, i) => drop.insertBefore(el('div', { class:'thumb' },
+      el('img', { src:p.url, alt:`Photo ${i+1}` }),
+      el('button', { type:'button', 'aria-label':`Retirer la photo ${i+1}`, text:'×', onclick:() => { photos.splice(i, 1); renderPhotos(); } })
+    ), $('#addBtns')));
     $('#addBtns').hidden = photos.length >= MAX_PHOTOS;
   };
   $('#btnCam').onclick = () => $('#camInput').click();
@@ -405,7 +628,7 @@ ul.clean li{margin-bottom:6px}
     let skipped = 0;
     for (const f of files) {
       if (photos.length >= MAX_PHOTOS) break;
-      try { const url = await toJpeg(f); photos.push({ url, b64: url.split(',')[1] }); }
+      try { const url = await toJpeg(f, 1280, .8); photos.push({ url, b64: url.split(',')[1] }); }
       catch { skipped++; }
     }
     notice(skipped ? `${skipped} photo(s) n'ont pas pu être lues. Utilisez du JPEG ou du PNG.` : '');
@@ -414,30 +637,13 @@ ul.clean li{margin-bottom:6px}
   $('#camInput').onchange = onFiles;
   $('#galInput').onchange = onFiles;
 
-  const makeThumb = src => new Promise(res => {
-    if (!src) return res(null);
-    const img = new Image();
-    img.onload = () => {
-      const s = 320, c = document.createElement('canvas');
-      const r = Math.max(s / img.width, s / img.height);
-      c.width = s; c.height = s;
-      c.getContext('2d').drawImage(img, (s - img.width*r)/2, (s - img.height*r)/2, img.width*r, img.height*r);
-      res(c.toDataURL('image/jpeg', .7));
-    };
-    img.onerror = () => res(null);
-    img.src = src;
-  });
-
   // ---------- Note vocale ----------
-  const MAX_REC_S = 120;
   let mediaRec = null, recChunks = [], voice = null, recTick = null, recT0 = 0, recStopped = null;
   const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
   const recBtn = $('#recBtn'), recLbl = $('#recLbl'), recTimer = $('#recTimer'), recMsg = $('#recMsg');
   const canRecord = !!(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
-  const pickMime = () => ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus']
-    .find(t => MediaRecorder.isTypeSupported?.(t)) || '';
+  const pickMime = () => ['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'].find(t => MediaRecorder.isTypeSupported?.(t)) || '';
   const isRecording = () => mediaRec && mediaRec.state === 'recording';
-
   const renderVoice = () => {
     const rec = isRecording();
     recBtn.hidden = !!voice && !rec;
@@ -445,22 +651,19 @@ ul.clean li{margin-bottom:6px}
     recBtn.setAttribute('aria-pressed', rec);
     recBtn.querySelector('svg').style.display = rec ? 'none' : '';
     const dot = recBtn.querySelector('.dot');
-    if (rec && !dot) recBtn.prepend(el('span', {class:'dot', 'aria-hidden':'true'}));
+    if (rec && !dot) recBtn.prepend(el('span', { class:'dot', 'aria-hidden':'true' }));
     if (!rec && dot) dot.remove();
     recLbl.textContent = rec ? 'Arrêter' : 'Enregistrer une note vocale';
     recTimer.hidden = !rec;
     $('#voicePlayer').hidden = !voice;
     if (voice) { $('#voiceAudio').src = voice.url; $('#voiceDur').textContent = fmt(voice.duration); }
   };
-
   async function startRecording() {
     recMsg.textContent = '';
     let stream;
     try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); }
     catch (e) {
-      recMsg.textContent = e?.name === 'NotAllowedError'
-        ? "Micro bloqué. Autorisez l'accès au micro pour ce site dans les réglages du navigateur."
-        : 'Aucun micro disponible sur cet appareil.';
+      recMsg.textContent = e?.name === 'NotAllowedError' ? "Micro bloqué. Autorisez l'accès au micro pour ce site dans les réglages du navigateur." : 'Aucun micro disponible sur cet appareil.';
       return;
     }
     const mime = pickMime();
@@ -473,8 +676,8 @@ ul.clean li{margin-bottom:6px}
         clearInterval(recTick);
         const duration = (Date.now() - recT0) / 1000;
         const blob = new Blob(recChunks, { type: (mediaRec.mimeType || mime || 'audio/webm').split(';')[0] });
-        if (duration < 1 || !blob.size) { recMsg.textContent = 'Enregistrement trop court. Réessayez.'; }
-        else { voice = { blob, url: URL.createObjectURL(blob), duration, mime: blob.type }; recMsg.textContent = "Note enregistrée. Réécoutez-la si besoin, puis lancez l'analyse."; }
+        if (duration < 1 || !blob.size) recMsg.textContent = 'Enregistrement trop court. Réessayez.';
+        else { voice = { blob, url: URL.createObjectURL(blob), duration, mime: blob.type }; recMsg.textContent = 'Note enregistrée. Réécoutez-la si besoin.'; }
         renderVoice(); res();
       };
     });
@@ -490,7 +693,6 @@ ul.clean li{margin-bottom:6px}
   }
   async function stopRecording() { if (isRecording()) { mediaRec.stop(); await recStopped; } }
   const clearVoice = () => { if (voice) URL.revokeObjectURL(voice.url); voice = null; $('#voiceAudio').removeAttribute('src'); renderVoice(); };
-
   if (canRecord) {
     recBtn.onclick = () => isRecording() ? stopRecording() : startRecording();
     $('#voiceDel').onclick = () => { clearVoice(); recMsg.textContent = ''; };
@@ -505,101 +707,7 @@ ul.clean li{margin-bottom:6px}
     r.readAsDataURL(blob);
   });
 
-  // ---------- Normalisation de l'analyse ----------
-  const clamp4 = v => Math.min(4, Math.max(1, Math.round(Number(v) || 1)));
-  const arr = v => Array.isArray(v) ? v : [];
-  const normalize = a => ({
-    synthese: String(a?.synthese || ''),
-    qualification_commentaire: String(a?.qualification_commentaire || ''),
-    photo_exploitable: a?.photo_exploitable !== false,
-    remarque_photo: String(a?.remarque_photo || ''),
-    dangers: arr(a?.dangers).slice(0, 6).map(d => {
-      const g = clamp4(d.gravite), p = clamp4(d.probabilite);
-      return { famille:String(d.famille||'Autre'), danger:String(d.danger||''), dommage_possible:String(d.dommage_possible||''), gravite:g, probabilite:p, criticite:g*p, justification:String(d.justification||'') };
-    }),
-    mesures_immediates: arr(a?.mesures_immediates).map(String).filter(Boolean),
-    mesures_preventives: arr(a?.mesures_preventives).map(m => ({niveau:String(m.niveau||''), mesure:String(m.mesure||''), responsable_suggere:String(m.responsable_suggere||'')}))
-      .filter(m => m.mesure)
-      .sort((x,y) => (NIVEAUX.indexOf(x.niveau)+99)%99 - (NIVEAUX.indexOf(y.niveau)+99)%99),
-    points_a_verifier: arr(a?.points_a_verifier).map(String).filter(Boolean),
-    references: arr(a?.references).map(String).filter(Boolean),
-  });
-
-  const transcriptCard = t => t ? el('div', {class:'card'}, el('h3', {text:'Note vocale transcrite'}),
-    el('p', {class:'transcript', text:t}),
-    el('p', {class:'hint', style:'margin:8px 0 0', text:'Transcription automatique, peut contenir des erreurs.'})) : null;
-
-  // ---------- Rendu de l'analyse ----------
-  const renderMatrix = dangers => {
-    const m = el('div', {class:'matrix', role:'img', 'aria-label':'Matrice gravité par probabilité'});
-    for (let g = 4; g >= 1; g--) {
-      m.append(el('div', {class:'ax', text:String(g), title:`Gravité ${g} : ${G_LBL[g]}`}));
-      for (let p = 1; p <= 4; p++) {
-        const c = bandColors(band(g*p));
-        const cell = el('div', {class:'cell', style:`background:${c.bg};box-shadow:inset 0 0 0 1px ${c.fg}`});
-        dangers.forEach((d, i) => { if (d.gravite === g && d.probabilite === p) cell.append(el('span', {class:'pin', text:`D${i+1}`})); });
-        m.append(cell);
-      }
-    }
-    m.append(el('div'));
-    for (let p = 1; p <= 4; p++) m.append(el('div', {class:'ax', text:String(p), title:`Probabilité ${p} : ${P_LBL[p]}`}));
-    const leg = el('div', {class:'legend'},
-      el('div', {text:'Vertical : gravité. Horizontal : probabilité.'}),
-      ...[4,3,2,1].map(b => el('div', {}, el('i', {style:`background:var(--r${b})`}), `${BAND_LBL[b]} (${['','1 à 3','4 à 6','8 à 9','12 à 16'][b]})`))
-    );
-    return el('div', {class:'matrix-wrap'}, m, leg);
-  };
-
-  const renderAnalysis = a => {
-    const frag = document.createDocumentFragment();
-    const top = el('div', {class:'card'}, el('h3', {text:'Synthèse'}), el('p', {class:'synth', text:a.synthese}));
-    if (a.qualification_commentaire) top.append(el('p', {class:'qualif', text:`Qualification : ${a.qualification_commentaire}`}));
-    if (!a.photo_exploitable && a.remarque_photo) top.append(el('p', {class:'qualif', text:`Photo : ${a.remarque_photo}`}));
-    frag.append(top);
-    if (a.dangers.length) {
-      frag.append(el('div', {class:'card'}, el('h3', {text:'Cotation des risques'}), renderMatrix(a.dangers)));
-      const dl = el('div', {class:'card'}, el('h3', {text:'Dangers identifiés'}));
-      a.dangers.forEach((d, i) => {
-        const b = band(d.criticite), col = bandColors(b);
-        dl.append(el('div', {class:'danger'},
-          el('div', {class:'dhead'},
-            el('b', {text:`D${i+1}. ${d.danger}`}),
-            el('span', {class:'badge', style:`background:${col.bg};color:${col.fg};box-shadow:inset 0 0 0 1px ${col.fg}`, text:`${d.criticite} · ${BAND_LBL[b]}`})
-          ),
-          el('div', {class:'fam', text:`${d.famille}. Gravité ${d.gravite} (${G_LBL[d.gravite]}), probabilité ${d.probabilite} (${P_LBL[d.probabilite]})`}),
-          d.dommage_possible ? el('p', {text:`Dommage possible : ${d.dommage_possible}`}) : null,
-          d.justification ? el('p', {text:d.justification}) : null
-        ));
-      });
-      frag.append(dl);
-    }
-    if (a.mesures_immediates.length) frag.append(el('div', {class:'card', style:'border-left:5px solid var(--accent)'},
-      el('h3', {text:'À faire tout de suite'}), el('ul', {class:'clean'}, ...a.mesures_immediates.map(t => el('li', {text:t})))));
-    if (a.mesures_preventives.length) {
-      const c = el('div', {class:'card'}, el('h3', {text:'Mesures préventives'}),
-        el('p', {class:'hint', text:'Classées selon les principes généraux de prévention, du plus efficace au moins efficace.'}));
-      a.mesures_preventives.forEach(m => c.append(el('div', {class:'mesure'},
-        el('div', {class:'lvl', text:m.niveau || 'Autre'}),
-        el('div', {}, m.mesure, m.responsable_suggere ? el('span', {class:'resp', text:`Pilote suggéré : ${m.responsable_suggere}`}) : null))));
-      frag.append(c);
-    }
-    if (a.points_a_verifier.length) frag.append(el('div', {class:'card'}, el('h3', {text:'À vérifier sur place'}),
-      el('ul', {class:'clean'}, ...a.points_a_verifier.map(t => el('li', {text:t})))));
-    if (a.references.length) frag.append(el('div', {class:'card'}, el('h3', {text:'Références à consulter'}),
-      el('ul', {class:'clean'}, ...a.references.map(t => el('li', {text:t}))),
-      el('p', {class:'hint', style:'margin:8px 0 0', text:'À confirmer dans le texte en vigueur.'})));
-    frag.append(el('p', {class:'disclaimer', text:"Proposition générée par IA à partir des photos et de la description. La cotation et les mesures sont à valider par le service QSE."}));
-    return frag;
-  };
-
-  // ---------- Analyse ----------
-  const errMsg = e => e.message || ({
-    429: "Trop de demandes. Réessayez dans une minute.",
-    413: "Photos trop lourdes. Retirez-en une.",
-    502: "Le service d'analyse est momentanément indisponible. Réessayez.",
-  }[e.status]) || "L'analyse a échoué. Réessayez dans un instant.";
-
-  let ctl = null, current = null;
+  // ---------- Envoi d'une remontée ----------
   $('#form').onsubmit = async e => {
     e.preventDefault();
     await stopRecording();
@@ -609,143 +717,546 @@ ul.clean li{margin-bottom:6px}
       lieu: $('#lieu').value.trim().slice(0, 300),
       desc: $('#desc').value.trim().slice(0, 3000),
     };
-    const res = $('#result');
     if (!photos.length && !d.desc && !voice) {
-      res.hidden = false;
-      res.replaceChildren(el('p', {class:'notice', text:"Ajoutez au moins une photo, une note vocale ou une description pour lancer l'analyse."}));
+      notice('Ajoutez au moins une photo, une note vocale ou une description.');
+      $('#aiNotice').scrollIntoView({ behavior:'smooth', block:'center' });
       return;
     }
-    ctl = new AbortController();
-    const btn = $('#analyzeBtn'); btn.disabled = true;
-    res.hidden = false;
-    res.replaceChildren(el('div', {class:'loading'}, el('div', {class:'spin', 'aria-hidden':'true'}),
-      el('div', {style:'flex:1'}, el('b', {text:'Analyse en cours'}), el('div', {class:'hint', style:'margin:0', text:'Comptez 20 à 60 secondes.'})),
-      el('button', {type:'button', class:'btn ghost small', text:'Arrêter', onclick:() => ctl.abort()})));
-    res.scrollIntoView({behavior:'smooth', block:'start'});
+    const btn = $('#sendBtn'); btn.disabled = true; btn.textContent = 'Enregistrement…';
     try {
-      const audio = voice ? { data: await blobToB64(voice.blob), mime: voice.mime } : null;
-      const r = await api('/api/analyze', { method:'POST', signal:ctl.signal, body:{ ...d, images: photos.map(p => p.b64), audio } });
-      const a = normalize(r.analysis);
-      const transcript = String(r.transcript || '');
-      if (!a.dangers.length && !a.synthese) throw { message: "La réponse n'a pas pu être lue. Relancez l'analyse." };
-      current = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), date: new Date().toISOString(), ...d,
-        thumb: await makeThumb(photos[0]?.url), note_vocale: transcript, analysis: a, statut: 'Ouvert' };
-      const saveBtn = el('button', {type:'button', class:'btn primary', text:'Enregistrer au registre'});
-      saveBtn.onclick = async () => {
-        saveBtn.disabled = true; saveBtn.textContent = 'Enregistrement…';
-        try { await api('/api/remontees', { method:'POST', body:{ ...current, declarant: session.name } }); saveBtn.textContent = 'Enregistrée'; loadRegistre(); }
-        catch (err) { saveBtn.disabled = false; saveBtn.textContent = "Échec de l'enregistrement, réessayer"; }
+      const item = {
+        id: newId(), date: new Date().toISOString(), declarant: session.name, declarant_id: session.uid, ...d,
+        images: photos.map(p => p.b64), thumb: await makeThumb(photos[0]?.url),
+        audio: voice ? { data: await blobToB64(voice.blob), mime: voice.mime } : null,
+        status: 'pending', tries: 0,
       };
-      res.replaceChildren(transcriptCard(transcript), renderAnalysis(a), el('div', {class:'actions'}, saveBtn,
-        el('button', {type:'button', class:'btn ghost', text:'Nouvelle remontée', onclick:resetForm})));
+      await qPut(item);
+      resetForm();
+      const online = navigator.onLine;
+      const res = $('#result'); res.hidden = false;
+      res.replaceChildren(el('div', { class:'card success' },
+        el('h3', { text:'Remontée enregistrée' }),
+        el('p', { style:'margin:0 0 12px', text: online
+          ? 'Elle est en cours d\'envoi au service QSE, qui va l\'analyser. Vous pourrez suivre les actions mises en place dans « Mes envois ».'
+          : 'Vous êtes hors ligne. Elle partira automatiquement dès que le téléphone captera du réseau. Gardez l\'appli ouverte ou rouvrez-la plus tard.' }),
+        el('div', { class:'row' },
+          el('button', { type:'button', class:'btn small', text:'Voir mes envois', onclick:() => showView('mine') }),
+          el('button', { type:'button', class:'btn ghost small', text:'Nouvelle remontée', onclick:() => { res.hidden = true; } }))
+      ));
+      window.scrollTo({ top:0, behavior:'smooth' });
+      updateNet();
+      processQueue();
     } catch (err) {
-      if (err?.aborted) { res.hidden = true; res.replaceChildren(); }
-      else if (err?.status !== 401) res.replaceChildren(el('p', {class:'notice', text: errMsg(err)}));
-    } finally { btn.disabled = false; }
+      notice("Impossible d'enregistrer la remontée sur cet appareil. Libérez de l'espace ou retirez une photo.");
+    } finally { btn.disabled = false; btn.textContent = 'Envoyer la remontée'; }
   };
-  function resetForm(){
+  function resetForm() {
     stopRecording(); clearVoice(); recMsg.textContent = canRecord ? '' : recMsg.textContent;
     photos = []; renderPhotos();
-    $('#form').reset(); $('#result').hidden = true; $('#result').replaceChildren(); notice('');
-    window.scrollTo({top:0, behavior:'smooth'});
+    $('#form').reset(); notice('');
   }
 
-  // ---------- Registre ----------
-  let entries = [], regLoaded = false, regError = '';
-  const openIds = new Set();
-  const maxCrit = e => Math.max(0, ...(e.analysis?.dangers || []).map(d => d.criticite));
-
-  async function loadRegistre(){
+  // ---------- Mes envois ----------
+  let mine = [], mineAt = null, mineErr = '';
+  const mineKey = () => 'vigie.mine.' + session?.uid;
+  async function loadMine() {
     if (!session) return;
-    try { entries = (await api('/api/remontees')).items || []; regError = ''; regLoaded = true; }
-    catch (e) { if (e.status !== 401) regError = e.message || 'Le registre ne peut pas être chargé.'; }
-    renderRegistre();
+    if (!mine.length) { const c = readJSON(mineKey(), null); if (c) { mine = c.items || []; mineAt = c.at; } }
+    try {
+      const r = await api('/api/mine');
+      mine = r.items || []; mineAt = Date.now(); mineErr = '';
+      writeJSON(mineKey(), { items: mine, at: mineAt });
+    } catch (e) { if (e.status !== 401) mineErr = e.offline ? 'offline' : (e.message || 'Mise à jour impossible.'); }
+    if (currentView === 'mine') renderMine();
   }
-  $('#refreshBtn').onclick = loadRegistre;
-  setInterval(() => { if (session && !document.hidden && !$('#view-reg').hidden) loadRegistre(); }, 30000);
-  document.addEventListener('visibilitychange', () => { if (!document.hidden && session) loadRegistre(); });
-
-  function renderRegistre(){
-    const box = $('#regList');
-    $('#regCount').textContent = entries.length ? `(${entries.length})` : '';
-    $('#exportBtn').hidden = !entries.length;
-    const top = regError ? [el('p', {class:'notice', style:'margin:0 0 12px', text:regError})] : [];
-    if (!regLoaded) { box.replaceChildren(...top, el('div', {class:'empty'}, el('p', {text:'Chargement du registre…'}))); return; }
-    if (!entries.length) {
-      box.replaceChildren(...top, el('div', {class:'empty'}, el('p', {text:'Aucune remontée dans le registre.'}),
-        el('button', {class:'btn primary small', text:'Faire une remontée', onclick:() => showTab('new')})));
+  async function renderMine() {
+    if (!session) return;
+    if (!mine.length) { const c = readJSON(mineKey(), null); if (c) { mine = c.items || []; mineAt = c.at; } }
+    let q = [];
+    try { q = (await qAll()).filter(x => x.declarant_id === session.uid); } catch {}
+    const box = $('#mineList');
+    const head = [];
+    if (mineErr === 'offline' || !navigator.onLine) head.push(el('p', { class:'notice', style:'margin:0 0 12px', text: mineAt ? `Hors ligne. Suivi à jour au ${fmtDateTime(mineAt)}.` : 'Hors ligne.' }));
+    else if (mineErr) head.push(el('p', { class:'notice', style:'margin:0 0 12px', text: mineErr }));
+    const local = q.map(x => ({ ...x, local: true })).reverse();
+    const ids = new Set(local.map(x => x.id));
+    const all = [...local, ...mine.filter(x => !ids.has(x.id))];
+    if (!all.length) {
+      box.replaceChildren(...head, el('div', { class:'empty' }, el('p', { text:"Vous n'avez encore envoyé aucune remontée." }),
+        el('button', { class:'btn small', text:'Faire une remontée', onclick:() => showView('new') })));
       return;
     }
-    box.replaceChildren(...top, ...entries.map(e => {
-      const c = maxCrit(e), b = band(c || 1), col = bandColors(b);
-      const d = new Date(e.date);
-      const statut = el('select', {'aria-label':'Statut'}, ...['Ouvert','En cours','Clôturé'].map(s => { const o = el('option', {text:s}); if (s === e.statut) o.selected = true; return o; }));
-      statut.onchange = async () => {
-        try { await api(`/api/remontees/${encodeURIComponent(e.id)}`, { method:'PATCH', body:{ statut: statut.value } }); e.statut = statut.value; renderRegistre(); }
-        catch { alert("Le statut n'a pas pu être modifié."); statut.value = e.statut; }
-      };
-      const del = session.role === 'admin' ? el('button', {type:'button', class:'btn ghost small', text:'Supprimer', onclick: async () => {
-        if (!confirm('Supprimer cette remontée du registre ? Elle disparaîtra pour tout le monde.')) return;
-        try { await api(`/api/remontees/${encodeURIComponent(e.id)}`, { method:'DELETE' }); openIds.delete(e.id); loadRegistre(); }
-        catch { alert('La suppression a échoué.'); }
-      }}) : null;
-      const det = el('details', {class:'entry', style:`border-left-color:${col.fg}`},
-        el('summary', {},
-          e.thumb ? el('img', {class:'eimg', src:e.thumb, alt:''}) : el('div', {class:'eimg'}),
-          el('div', {},
-            el('div', {class:'etitle', text:e.analysis?.dangers?.[0]?.danger || String(e.analysis?.synthese || '').slice(0,80)}),
-            el('div', {class:'emeta', text:`${d.toLocaleDateString('fr-FR')} · ${e.type} · ${e.secteur}${e.lieu ? ', ' + e.lieu : ''}${e.declarant ? ' · ' + e.declarant : ''}`})
-          ),
-          el('div', {style:'text-align:right'},
-            el('span', {class:'badge', style:`background:${col.bg};color:${col.fg}`, text:c ? String(c) : '–'}),
-            el('div', {class:'stat', style:'margin-top:6px', text:e.statut})
-          )
-        ),
-        el('div', {class:'ebody'},
-          el('div', {class:'erow'}, el('span', {style:'font-size:14px;font-weight:600', text:'Statut'}), statut, del),
-          e.desc ? el('p', {class:'hint', text:`Déclaration : ${e.desc}`}) : null,
-          e.note_vocale ? el('p', {class:'hint', text:`Note vocale : ${e.note_vocale}`}) : null,
-          renderAnalysis(normalize(e.analysis))
-        )
-      );
-      if (openIds.has(e.id)) det.open = true;
-      det.addEventListener('toggle', () => det.open ? openIds.add(e.id) : openIds.delete(e.id));
-      return det;
-    }));
+    box.replaceChildren(...head, ...all.map(mineEntry));
+  }
+  function mineEntry(e) {
+    let chip;
+    if (e.local) chip = e.status === 'error' ? el('span', { class:'chip st-error', text:"Échec d'envoi" })
+      : e.status === 'sending' ? el('span', { class:'chip st-pending' }, el('span', { class:'spin', style:'width:10px;height:10px;border-width:2px;margin-right:4px' }), 'Envoi…')
+      : el('span', { class:'chip st-pending', text:"En attente d'envoi" });
+    else chip = el('span', { class:`chip ${stClass(e.statut)}`, text: e.statut === 'Ouvert' ? 'Reçue' : e.statut === 'En cours' ? 'En traitement' : 'Clôturée' });
+    const suivi = e.suivi || { actions: [], message: '' };
+    const body = el('div', { class:'ebody' });
+    if (e.local) {
+      body.append(el('p', { class:'hint', style:'margin:8px 0', text: e.status === 'error'
+        ? `Le serveur a refusé l'envoi : ${e.error}`
+        : "Enregistrée sur ce téléphone. Elle partira automatiquement dès qu'il y a du réseau." }));
+      if (e.status === 'error') body.append(el('div', { class:'row' },
+        el('button', { class:'btn small', text:'Réessayer', onclick: async () => { e.status = 'pending'; delete e.local; delete e.error; await qPut(e); processQueue(); renderMine(); } }),
+        el('button', { class:'btn danger small', text:'Supprimer', onclick: async () => { if (confirm('Supprimer cette remontée non envoyée ?')) { await qDel(e.id); updateNet(); renderMine(); } } })));
+    } else {
+      const s = el('div', { class:'sec', style:'margin-top:4px;border-top:0;padding-top:4px' }, el('h4', { text:'Suivi du service QSE' }));
+      if (suivi.message) s.append(el('p', { class:'msg', text: suivi.message }));
+      if (suivi.actions?.length) s.append(el('ul', { class:'actlist' }, ...suivi.actions.map(a => el('li', {},
+        el('span', { class:`tick${a.fait ? ' done' : ''}`, 'aria-label': a.fait ? 'Réalisée' : 'À faire', text: a.fait ? '✓' : '' }),
+        el('span', { text: a.texte + (a.fait ? '' : ' (prévue)') })))));
+      if (!suivi.message && !suivi.actions?.length) s.append(el('p', { class:'hint', style:'margin:0', text: e.statut === 'Clôturé' ? 'Remontée clôturée.' : "Le service QSE n'a pas encore indiqué d'action." }));
+      if (suivi.maj) s.append(el('p', { class:'hint', style:'margin:8px 0 0', text:`Mis à jour le ${fmtDateTime(suivi.maj)}` }));
+      body.append(s);
+    }
+    const decl = el('div', { class:'sec' }, el('h4', { text:'Votre remontée' }),
+      el('p', { class:'hint', style:'margin:0 0 6px', text:`${e.type} · ${e.secteur}${e.lieu ? ' · ' + e.lieu : ''}` }));
+    if (e.desc) decl.append(el('p', { style:'margin:0 0 6px;font-size:15px', text: e.desc }));
+    if (e.note_vocale) decl.append(el('p', { style:'margin:0;font-size:15px;font-style:italic', text: `Note vocale : ${e.note_vocale}` }));
+    else if (e.local && e.audio) decl.append(el('p', { class:'hint', style:'margin:0', text:'Note vocale jointe.' }));
+    body.append(decl);
+    return el('details', { class:'entry', style:`border-left-color:${e.local ? 'var(--line)' : e.statut === 'Clôturé' ? 'var(--r1)' : e.statut === 'En cours' ? 'var(--r2)' : 'var(--r3)'}` },
+      el('summary', {},
+        e.thumb ? el('img', { class:'eimg', src:e.thumb, alt:'' }) : el('div', { class:'eimg' }),
+        el('div', {}, el('div', { class:'etitle', text: e.lieu || e.secteur }), el('div', { class:'emeta', text:`${fmtDate(e.date)} · ${e.type}` })),
+        el('div', { class:'eright' }, chip, (!e.local && suivi.actions?.length) ? el('span', { class:'emeta', text:`${suivi.actions.filter(a => a.fait).length}/${suivi.actions.length} actions` }) : null)
+      ), body);
   }
 
+  // ---------- Normalisation et rendu de l'analyse ----------
+  const clamp4 = v => Math.min(4, Math.max(1, Math.round(Number(v) || 1)));
+  const arr = v => Array.isArray(v) ? v : [];
+  const normalize = a => ({
+    synthese: String(a?.synthese || ''),
+    qualification_commentaire: String(a?.qualification_commentaire || ''),
+    photo_exploitable: a?.photo_exploitable !== false,
+    remarque_photo: String(a?.remarque_photo || ''),
+    dangers: arr(a?.dangers).slice(0, 8).map(d => {
+      const g = clamp4(d.gravite), p = clamp4(d.probabilite);
+      return { famille:String(d.famille||'Autre'), danger:String(d.danger||''), dommage_possible:String(d.dommage_possible||''), gravite:g, probabilite:p, criticite:g*p, justification:String(d.justification||'') };
+    }),
+    mesures_immediates: arr(a?.mesures_immediates).map(String).filter(Boolean),
+    mesures_preventives: arr(a?.mesures_preventives).map(m => ({ niveau:String(m.niveau||''), mesure:String(m.mesure||''), responsable_suggere:String(m.responsable_suggere||'') }))
+      .filter(m => m.mesure)
+      .sort((x, y) => (NIVEAUX.indexOf(x.niveau)+99)%99 - (NIVEAUX.indexOf(y.niveau)+99)%99),
+    points_a_verifier: arr(a?.points_a_verifier).map(String).filter(Boolean),
+    references: arr(a?.references).map(String).filter(Boolean),
+  });
+  const maxCrit = e => Math.max(0, ...normalize(e.analysis).dangers.map(d => d.criticite));
+
+  const renderMatrix = dangers => {
+    const m = el('div', { class:'matrix', role:'img', 'aria-label':'Matrice gravité par probabilité' });
+    for (let g = 4; g >= 1; g--) {
+      m.append(el('div', { class:'ax', text:String(g), title:`Gravité ${g} : ${G_LBL[g]}` }));
+      for (let p = 1; p <= 4; p++) {
+        const c = bandColors(band(g*p));
+        const cell = el('div', { class:'cell', style:`background:${c.bg};box-shadow:inset 0 0 0 1px ${c.fg}` });
+        dangers.forEach((d, i) => { if (d.gravite === g && d.probabilite === p) cell.append(el('span', { class:'pin', text:`D${i+1}` })); });
+        m.append(cell);
+      }
+    }
+    m.append(el('div'));
+    for (let p = 1; p <= 4; p++) m.append(el('div', { class:'ax', text:String(p), title:`Probabilité ${p} : ${P_LBL[p]}` }));
+    return el('div', { class:'matrix-wrap' }, m, el('div', { class:'legend' },
+      el('div', { text:'Vertical : gravité. Horizontal : probabilité.' }),
+      ...[4,3,2,1].map(b => el('div', {}, el('i', { style:`background:var(--r${b})` }), `${BAND_LBL[b]} (${['','1 à 3','4 à 6','8 à 9','12 à 16'][b]})`))));
+  };
+  const renderAnalysis = a => {
+    const frag = document.createDocumentFragment();
+    const top = el('div', { class:'card' }, el('h3', { text:'Synthèse' }), el('p', { class:'synth', text:a.synthese }));
+    if (a.qualification_commentaire) top.append(el('p', { class:'qualif', text:`Qualification : ${a.qualification_commentaire}` }));
+    if (!a.photo_exploitable && a.remarque_photo) top.append(el('p', { class:'qualif', text:`Photo : ${a.remarque_photo}` }));
+    frag.append(top);
+    if (a.dangers.length) {
+      frag.append(el('div', { class:'card' }, el('h3', { text:'Cotation des risques' }), renderMatrix(a.dangers)));
+      const dl = el('div', { class:'card' }, el('h3', { text:'Dangers identifiés' }));
+      a.dangers.forEach((d, i) => {
+        const b = band(d.criticite), col = bandColors(b);
+        dl.append(el('div', { class:'danger' },
+          el('div', { class:'dhead' }, el('b', { text:`D${i+1}. ${d.danger}` }),
+            el('span', { class:'badge', style:`background:${col.bg};color:${col.fg};box-shadow:inset 0 0 0 1px ${col.fg}`, text:`${d.criticite} · ${BAND_LBL[b]}` })),
+          el('div', { class:'fam', text:`${d.famille}. Gravité ${d.gravite} (${G_LBL[d.gravite]}), probabilité ${d.probabilite} (${P_LBL[d.probabilite]})` }),
+          d.dommage_possible ? el('p', { text:`Dommage possible : ${d.dommage_possible}` }) : null,
+          d.justification ? el('p', { text:d.justification }) : null));
+      });
+      frag.append(dl);
+    }
+    if (a.mesures_immediates.length) frag.append(el('div', { class:'card', style:'border-left:5px solid var(--r3)' },
+      el('h3', { text:'À faire tout de suite' }), el('ul', { class:'clean' }, ...a.mesures_immediates.map(t => el('li', { text:t })))));
+    if (a.mesures_preventives.length) {
+      const c = el('div', { class:'card' }, el('h3', { text:'Mesures préventives' }),
+        el('p', { class:'hint', text:'Classées selon les principes généraux de prévention, du plus efficace au moins efficace.' }));
+      a.mesures_preventives.forEach(m => c.append(el('div', { class:'mesure' },
+        el('div', { class:'lvl', text:m.niveau || 'Autre' }),
+        el('div', {}, m.mesure, m.responsable_suggere ? el('span', { class:'resp', text:`Pilote suggéré : ${m.responsable_suggere}` }) : null))));
+      frag.append(c);
+    }
+    if (a.points_a_verifier.length) frag.append(el('div', { class:'card' }, el('h3', { text:'À vérifier sur place' }),
+      el('ul', { class:'clean' }, ...a.points_a_verifier.map(t => el('li', { text:t })))));
+    if (a.references.length) frag.append(el('div', { class:'card' }, el('h3', { text:'Références à consulter' }),
+      el('ul', { class:'clean' }, ...a.references.map(t => el('li', { text:t }))),
+      el('p', { class:'hint', style:'margin:8px 0 0', text:'À confirmer dans le texte en vigueur.' })));
+    return frag;
+  };
+
+  // ---------- Données administrateur ----------
+  let entries = [], allLoaded = false, allErr = '', loadingAll = false;
+  async function loadAll() {
+    if (!isAdmin() || loadingAll) return;
+    loadingAll = true;
+    try { entries = (await api('/api/remontees')).items || []; allLoaded = true; allErr = ''; }
+    catch (e) { if (e.status !== 401) allErr = e.offline ? 'Hors ligne : le tableau de bord et le registre nécessitent du réseau.' : (e.message || 'Chargement impossible.'); }
+    finally { loadingAll = false; }
+    fillSecteurs();
+    if (currentView === 'dash') renderDash();
+    if (currentView === 'reg') renderReg();
+  }
+  const replaceEntry = item => { const i = entries.findIndex(x => x.id === item.id); if (i >= 0) entries[i] = item; else entries.unshift(item); };
+
+  // ---------- Tableau de bord ----------
+  $('#dashPeriod').onchange = () => renderDash();
+  function bars(rows, colorFn) {
+    const max = Math.max(1, ...rows.map(r => r[1]));
+    return el('div', { class:'bars' }, ...rows.map(([label, n], i) => el('div', { class:'bar' },
+      el('span', { text:label }),
+      el('span', { class:'track' }, el('span', { class:'fill', style:`display:block;width:${(n / max) * 100}%;${colorFn ? 'background:' + colorFn(label, i) : ''}` })),
+      el('span', { class:'n', text:String(n) }))));
+  }
+  function renderDash() {
+    const box = $('#dash');
+    if (allErr && !allLoaded) { box.replaceChildren(el('p', { class:'notice', text: allErr })); return; }
+    if (!allLoaded) { box.replaceChildren(el('div', { class:'empty' }, el('span', { class:'spin' }), ' Chargement…')); return; }
+    const per = $('#dashPeriod').value;
+    const since = per === 'all' ? 0 : Date.now() - Number(per) * 86400000;
+    const list = entries.filter(e => new Date(e.date) >= since);
+    const open = list.filter(e => e.statut === 'Ouvert'), prog = list.filter(e => e.statut === 'En cours'), closed = list.filter(e => e.statut === 'Clôturé');
+    const active = list.filter(e => e.statut !== 'Clôturé');
+    const crit = active.filter(e => maxCrit(e) >= 12);
+    const toAnalyze = list.filter(e => e.analysis_status === 'erreur');
+    const delays = closed.filter(e => e.closed_at).map(e => (new Date(e.closed_at) - new Date(e.date)) / 86400000);
+    const avgDelay = delays.length ? Math.round(delays.reduce((a, b) => a + b, 0) / delays.length) : null;
+
+    const kpi = (n, label, color, onclick) => el('button', { class:'kpi', style:`border-top-color:${color};text-align:left;border-left:0;border-right:0;border-bottom:0;cursor:pointer;color:inherit`, onclick },
+      el('b', { text:String(n) }), el('span', { text:label }));
+    const goReg = (statut, niveau) => () => { $('#fStatut').value = statut || ''; $('#fNiveau').value = niveau || ''; $('#fSecteur').value = ''; $('#fQ').value = ''; showView('reg'); };
+
+    const kpis = el('div', { class:'kpis' },
+      kpi(open.length, 'Ouvertes', 'var(--r3)', goReg('Ouvert')),
+      kpi(prog.length, 'En cours', 'var(--r2)', goReg('En cours')),
+      kpi(closed.length, 'Clôturées', 'var(--r1)', goReg('Clôturé')),
+      kpi(crit.length, 'Critiques non clôturées', 'var(--r4)', goReg('actifs', '4')));
+    const extra = el('p', { class:'hint', style:'margin:0 0 14px' },
+      `${list.length} remontée(s) sur la période`,
+      avgDelay != null ? ` · délai moyen de clôture : ${avgDelay} jour(s)` : '',
+      toAnalyze.length ? el('span', {}, ' · ', el('button', { class:'linkbtn', style:'color:var(--r4)', text:`${toAnalyze.length} analyse(s) à relancer`, onclick: goReg('', 'erreur') })) : '');
+
+    // Priorités
+    const prio = [...active].sort((a, b) => maxCrit(b) - maxCrit(a) || new Date(a.date) - new Date(b.date)).slice(0, 6);
+    const prioCard = el('div', { class:'card' }, el('h3', { text:'À traiter en priorité' }),
+      prio.length ? el('div', {}, ...prio.map(e => {
+        const c = maxCrit(e), col = bandColors(band(c || 1));
+        return el('button', { class:'prio', onclick: () => openInReg(e.id) },
+          el('span', { class:'badge', style:`background:${col.bg};color:${col.fg}`, text: c ? String(c) : '–' }),
+          el('span', {}, el('div', { class:'etitle', text: titleOf(e) }), el('div', { class:'emeta', text:`${e.secteur}${e.lieu ? ' · ' + e.lieu : ''} · il y a ${daysSince(e.date)} j` })),
+          el('span', { class:`chip ${stClass(e.statut)}`, text:e.statut }));
+      })) : el('p', { class:'hint', style:'margin:0', text:'Aucune remontée en attente de traitement.' }));
+
+    // Répartitions
+    const byBand = [4,3,2,1].map(b => [BAND_LBL[b], active.filter(e => { const c = maxCrit(e); return c && band(c) === b; }).length]);
+    const count = (items, key) => Object.entries(items.reduce((m, e) => { const k = key(e); if (k) m[k] = (m[k] || 0) + 1; return m; }, {})).sort((a, b) => b[1] - a[1]);
+    const bySect = count(list, e => e.secteur).slice(0, 8);
+    const byFam = count(list, e => normalize(e.analysis).dangers[0]?.famille).slice(0, 8);
+
+    // Évolution mensuelle (12 mois)
+    const months = [];
+    const now = new Date();
+    for (let i = 11; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const n = entries.filter(e => { const x = new Date(e.date); return x.getFullYear() === d.getFullYear() && x.getMonth() === d.getMonth(); }).length;
+      months.push([d.toLocaleDateString('fr-FR', { month:'short' }).replace('.', ''), n]);
+    }
+    const mMax = Math.max(1, ...months.map(m => m[1]));
+
+    box.replaceChildren(kpis, extra, prioCard,
+      el('div', { class:'card' }, el('h3', { text:'Niveau de risque des remontées non clôturées' }),
+        bars(byBand, label => `var(--r${BAND_LBL.indexOf(label)})`)),
+      el('div', { class:'card' }, el('h3', { text:'Par secteur' }), bySect.length ? bars(bySect) : el('p', { class:'hint', text:'Aucune donnée.' })),
+      el('div', { class:'card' }, el('h3', { text:'Par famille de danger principal' }), byFam.length ? bars(byFam) : el('p', { class:'hint', text:'Aucune donnée.' })),
+      el('div', { class:'card' }, el('h3', { text:'Remontées par mois (12 derniers mois)' }),
+        el('div', { class:'months' }, ...months.map(([l, n]) => el('div', {}, el('b', { text: n ? String(n) : '' }), el('i', { style:`height:${(n / mMax) * 85}%` }), l)))));
+  }
+  function openInReg(id) {
+    $('#fStatut').value = ''; $('#fNiveau').value = ''; $('#fSecteur').value = ''; $('#fQ').value = '';
+    openIds.add(id);
+    showView('reg');
+    requestAnimationFrame(() => document.querySelector(`[data-id="${id}"]`)?.scrollIntoView({ behavior:'smooth', block:'start' }));
+  }
+  const titleOf = e => normalize(e.analysis).dangers[0]?.danger || e.analysis?.synthese || e.desc || e.lieu || e.secteur;
+
+  // ---------- Registre ----------
+  const openIds = new Set();
+  function fillSecteurs() {
+    const sel = $('#fSecteur'), cur = sel.value;
+    const s = [...new Set(entries.map(e => e.secteur).filter(Boolean))].sort();
+    sel.replaceChildren(el('option', { value:'', text:'Tous les secteurs' }), ...s.map(x => el('option', { text:x })));
+    sel.value = s.includes(cur) ? cur : '';
+  }
+  ['#fStatut','#fNiveau','#fSecteur'].forEach(s => $(s).onchange = () => renderReg());
+  let qT; $('#fQ').oninput = () => { clearTimeout(qT); qT = setTimeout(renderReg, 200); };
+  $('#refreshBtn').onclick = () => loadAll();
+  const filtered = () => {
+    const st = $('#fStatut').value, nv = $('#fNiveau').value, se = $('#fSecteur').value, q = $('#fQ').value.trim().toLowerCase();
+    return entries.filter(e => {
+      if (st === 'actifs' && e.statut === 'Clôturé') return false;
+      if (st && st !== 'actifs' && e.statut !== st) return false;
+      if (nv === 'erreur' && e.analysis_status !== 'erreur') return false;
+      if (nv && nv !== 'erreur') { const c = maxCrit(e); if (!c || band(c) !== Number(nv)) return false; }
+      if (se && e.secteur !== se) return false;
+      if (q) {
+        const a = normalize(e.analysis);
+        const hay = [e.lieu, e.secteur, e.declarant, e.desc, e.note_vocale, a.synthese, ...a.dangers.map(d => d.danger)].join(' ').toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+  };
+  function renderReg() {
+    const box = $('#regList');
+    if (allErr && !allLoaded) { box.replaceChildren(el('p', { class:'notice', text: allErr })); $('#regInfo').textContent = ''; return; }
+    if (!allLoaded) { box.replaceChildren(el('div', { class:'empty' }, el('span', { class:'spin' }), ' Chargement…')); return; }
+    const list = filtered();
+    $('#regInfo').textContent = `${list.length} remontée(s)${list.length !== entries.length ? ` sur ${entries.length}` : ''}`;
+    if (!list.length) { box.replaceChildren(el('div', { class:'empty', text: entries.length ? 'Aucune remontée ne correspond aux filtres.' : 'Aucune remontée pour le moment.' })); return; }
+    box.replaceChildren(...list.map(adminEntry));
+  }
+  function rerender(id) {
+    const old = document.querySelector(`[data-id="${id}"]`);
+    const e = entries.find(x => x.id === id);
+    if (old && e) old.replaceWith(adminEntry(e));
+  }
+
+  function adminEntry(e) {
+    const c = maxCrit(e), col = bandColors(band(c || 1));
+    const body = el('div', { class:'ebody' });
+    const det = el('details', { class:'entry', 'data-id': e.id, style:`border-left-color:${e.analysis_status === 'erreur' ? 'var(--line)' : col.fg}` },
+      el('summary', {},
+        e.thumb ? el('img', { class:'eimg', src:e.thumb, alt:'' }) : el('div', { class:'eimg' }),
+        el('div', {},
+          el('div', { class:'etitle', text: titleOf(e) }),
+          el('div', { class:'emeta', text:`${fmtDate(e.date)} · ${e.type} · ${e.secteur}${e.lieu ? ', ' + e.lieu : ''}${e.declarant ? ' · ' + e.declarant : ''}` }),
+          e.analysis_status === 'erreur' ? el('span', { class:'flag', text:'Analyse à relancer' }) : e.analysis?.modifie_par_admin ? el('span', { class:'flag soft', text:'Analyse modifiée' }) : null),
+        el('div', { class:'eright' },
+          el('span', { class:'badge', style:`background:${col.bg};color:${col.fg}`, text: c ? String(c) : '–' }),
+          el('span', { class:`chip ${stClass(e.statut)}`, text:e.statut }))),
+      body);
+    let built = false;
+    const build = () => { if (built) return; built = true; buildAdminBody(e, body); };
+    if (openIds.has(e.id)) { det.open = true; build(); }
+    det.addEventListener('toggle', () => { if (det.open) { openIds.add(e.id); build(); } else openIds.delete(e.id); });
+    return det;
+  }
+
+  const photoCache = new Map();
+  function buildAdminBody(e, body) {
+    // Déclaration
+    const decl = el('div', { class:'sec', style:'border-top:0;margin-top:0' }, el('h4', { text:'Déclaration' }));
+    if (e.nb_photos) {
+      const ph = el('div', { class:'photos' }, el('span', { class:'hint' }, el('span', { class:'spin' }), ' Chargement des photos…'));
+      decl.append(ph);
+      const show = list => ph.replaceChildren(...list.map((b64, i) => el('img', { src:'data:image/jpeg;base64,' + b64, alt:`Photo ${i+1}`, onclick:() => openLightbox('data:image/jpeg;base64,' + b64) })));
+      if (photoCache.has(e.id)) show(photoCache.get(e.id));
+      else api(`/api/remontees/${e.id}/photos`).then(r => { photoCache.set(e.id, r.photos || []); show(r.photos || []); })
+        .catch(() => ph.replaceChildren(el('span', { class:'hint', text:'Photos indisponibles (réseau).' })));
+    }
+    if (e.has_audio) {
+      const holder = el('div', { style:'margin-top:10px' });
+      holder.append(el('button', { class:'btn ghost small', text:'Écouter la note vocale', onclick: async ev => {
+        ev.target.disabled = true; ev.target.textContent = 'Chargement…';
+        try { const r = await api(`/api/remontees/${e.id}/audio`, { raw:true }); const url = URL.createObjectURL(await r.blob());
+          holder.replaceChildren(el('audio', { controls:true, src:url, style:'width:100%' })); holder.querySelector('audio').play().catch(() => {}); }
+        catch { ev.target.disabled = false; ev.target.textContent = 'Réessayer la lecture'; }
+      } }));
+      decl.append(holder);
+    }
+    decl.append(el('p', { class:'hint', style:'margin:10px 0 4px', text:`Déclarée par ${e.declarant || 'inconnu'} le ${fmtDateTime(e.date)}` }));
+    if (e.desc) decl.append(el('p', { style:'margin:0 0 6px;font-size:15px', text: e.desc }));
+    if (e.note_vocale) decl.append(el('p', { style:'margin:0;font-size:15px;font-style:italic', text:`Note vocale : ${e.note_vocale}` }));
+    body.append(decl);
+
+    // Analyse
+    const an = el('div', { class:'sec' });
+    const renderAn = () => {
+      an.replaceChildren(el('h4', { text:'Analyse IA' }));
+      if (e.analysis_status === 'erreur') {
+        const b = el('button', { class:'btn small', text:"Relancer l'analyse" });
+        b.onclick = async () => {
+          b.disabled = true; b.textContent = 'Analyse en cours (30 à 60 s)…';
+          try { const r = await api(`/api/remontees/${e.id}/reanalyze`, { method:'POST' });
+            e.analysis = r.analysis; e.analysis_status = 'ok'; e.note_vocale = r.note_vocale || e.note_vocale; replaceEntry(e); rerender(e.id); toast('Analyse terminée'); }
+          catch (err) { b.disabled = false; b.textContent = "Relancer l'analyse"; toast(err.message || "L'analyse a échoué."); }
+        };
+        an.append(el('p', { class:'notice', style:'margin:0 0 10px', text:"L'analyse automatique n'a pas abouti lors de l'envoi. La remontée est bien enregistrée." }), b);
+        return;
+      }
+      an.append(renderAnalysis(normalize(e.analysis)));
+      if (e.analysis?.modifie_par_admin) an.append(el('p', { class:'hint', text:`Analyse modifiée par le service QSE le ${fmtDateTime(e.analysis.modifie_le)}.` }));
+      an.append(el('button', { class:'btn ghost small', text:"Modifier l'analyse", onclick: () => an.replaceChildren(el('h4', { text:"Modifier l'analyse" }), analysisEditor(e, renderAn)) }));
+    };
+    renderAn();
+    body.append(an);
+
+    // Suivi
+    body.append(suiviEditor(e));
+
+    body.append(el('div', { class:'sec row' }, el('button', { class:'btn danger small', text:'Supprimer la remontée', onclick: async () => {
+      if (!confirm('Supprimer définitivement cette remontée, ses photos et sa note vocale ?')) return;
+      try { await api(`/api/remontees/${e.id}`, { method:'DELETE' }); entries = entries.filter(x => x.id !== e.id); openIds.delete(e.id); renderReg(); toast('Remontée supprimée'); }
+      catch { toast('La suppression a échoué.'); }
+    } })));
+  }
+
+  function suiviEditor(e) {
+    const s = { actions: (e.suivi?.actions || []).map(a => ({ ...a })), message: e.suivi?.message || '' };
+    const sec = el('div', { class:'sec' }, el('h4', { text:'Suivi (visible par le déclarant)' }));
+    const statut = el('select', { 'aria-label':'Statut' }, ...STATUTS.map(x => { const o = el('option', { text:x }); if (x === e.statut) o.selected = true; return o; }));
+    const list = el('ul', { class:'actlist' });
+    const drawList = () => list.replaceChildren(...s.actions.map((a, i) => el('li', {},
+      el('input', { type:'checkbox', checked: a.fait, 'aria-label':'Action réalisée', style:'width:20px;height:20px;margin-top:3px;flex:none', onchange: ev => { a.fait = ev.target.checked; } }),
+      el('input', { type:'text', value:a.texte, style:'padding:6px 8px', oninput: ev => { a.texte = ev.target.value; } }),
+      el('button', { type:'button', class:'btn ghost small', 'aria-label':'Retirer', text:'×', onclick: () => { s.actions.splice(i, 1); drawList(); } }))));
+    drawList();
+    const newAct = el('input', { type:'text', placeholder:'Nouvelle action (ex. pose d\'une main courante)' });
+    const add = () => { const t = newAct.value.trim(); if (!t) return; s.actions.push({ texte:t, fait:false }); newAct.value = ''; drawList(); newAct.focus(); };
+    newAct.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); add(); } });
+    const msg = el('textarea', { placeholder:'Message au déclarant (facultatif). Ex. Merci pour la remontée, la main courante sera posée cette semaine.', style:'min-height:70px' });
+    msg.value = s.message;
+    const save = el('button', { class:'btn small', text:'Enregistrer le suivi' });
+    save.onclick = async () => {
+      save.disabled = true; save.textContent = 'Enregistrement…';
+      try {
+        const r = await api(`/api/remontees/${e.id}`, { method:'PATCH', body:{ statut: statut.value, suivi: { actions: s.actions.filter(a => a.texte.trim()), message: msg.value } } });
+        replaceEntry(r.item); rerender(e.id); toast('Suivi enregistré');
+      } catch (err) { save.disabled = false; save.textContent = 'Enregistrer le suivi'; toast(err.offline ? 'Pas de réseau.' : (err.message || "L'enregistrement a échoué.")); }
+    };
+    sec.append(
+      el('label', { class:'field' }, el('span', { text:'Statut' }), statut),
+      el('div', { class:'field' }, el('span', { style:'display:block;font-size:14px;font-weight:600;margin-bottom:4px', text:'Actions mises en place' }), list,
+        el('div', { class:'row', style:'flex-wrap:nowrap;margin-top:6px' }, newAct, el('button', { type:'button', class:'btn ghost small', text:'Ajouter', onclick:add }))),
+      el('label', { class:'field' }, el('span', { text:'Message au déclarant' }), msg),
+      save);
+    return sec;
+  }
+
+  function analysisEditor(e, onDone) {
+    const a = normalize(e.analysis);
+    const wrap = el('div', {});
+    const synth = el('textarea', { style:'min-height:70px' }); synth.value = a.synthese;
+    const optSel = (opts, val) => { const s = el('select', {}, ...opts.map(o => el('option', { value:String(o.v ?? o), text:o.l ?? o }))); s.value = String(val); return s; };
+    const gp = [1,2,3,4];
+
+    const dBox = el('div', {});
+    const drawD = () => dBox.replaceChildren(...a.dangers.map((d, i) => {
+      const fam = optSel(FAMILLES.includes(d.famille) ? FAMILLES : [d.famille, ...FAMILLES], d.famille); fam.onchange = () => d.famille = fam.value;
+      const g = optSel(gp.map(v => ({ v, l:`${v} · ${G_LBL[v]}` })), d.gravite); g.onchange = () => d.gravite = Number(g.value);
+      const p = optSel(gp.map(v => ({ v, l:`${v} · ${P_LBL[v]}` })), d.probabilite); p.onchange = () => d.probabilite = Number(p.value);
+      const inp = (key, ta) => { const x = el(ta ? 'textarea' : 'input', ta ? {} : { type:'text' }); x.value = d[key]; x.oninput = () => d[key] = x.value; return x; };
+      return el('div', { class:'edrow' },
+        el('label', {}, `Danger D${i+1}`, inp('danger')),
+        el('div', { class:'edgrid', style:'margin-top:6px' },
+          el('label', {}, 'Famille', fam), el('label', {}, 'Dommage possible', inp('dommage_possible')),
+          el('label', {}, 'Gravité', g), el('label', {}, 'Probabilité', p)),
+        el('label', { style:'margin-top:6px' }, 'Justification', inp('justification', true)),
+        el('button', { type:'button', class:'linkbtn', style:'margin-top:6px', text:'Retirer ce danger', onclick:() => { a.dangers.splice(i, 1); drawD(); } }));
+    }));
+    drawD();
+
+    const mBox = el('div', {});
+    const drawM = () => mBox.replaceChildren(...a.mesures_preventives.map((m, i) => {
+      const niv = optSel(NIVEAUX, NIVEAUX.includes(m.niveau) ? m.niveau : 'Organisationnel'); m.niveau = niv.value; niv.onchange = () => m.niveau = niv.value;
+      const mes = el('textarea', { style:'min-height:50px' }); mes.value = m.mesure; mes.oninput = () => m.mesure = mes.value;
+      const resp = el('input', { type:'text' }); resp.value = m.responsable_suggere; resp.oninput = () => m.responsable_suggere = resp.value;
+      return el('div', { class:'edrow' },
+        el('div', { class:'edgrid' }, el('label', {}, 'Niveau', niv), el('label', {}, 'Pilote', resp)),
+        el('label', { style:'margin-top:6px' }, 'Mesure', mes),
+        el('button', { type:'button', class:'linkbtn', style:'margin-top:6px', text:'Retirer cette mesure', onclick:() => { a.mesures_preventives.splice(i, 1); drawM(); } }));
+    }));
+    drawM();
+
+    const lines = arrv => { const t = el('textarea', { style:'min-height:70px' }); t.value = arrv.join('\n'); return t; };
+    const imm = lines(a.mesures_immediates), pts = lines(a.points_a_verifier), refs = lines(a.references);
+    const save = el('button', { class:'btn small', text:"Enregistrer l'analyse" });
+    save.onclick = async () => {
+      const split = t => t.value.split('\n').map(s => s.trim()).filter(Boolean);
+      const out = { ...e.analysis, ...a,
+        synthese: synth.value.trim(),
+        dangers: a.dangers.filter(d => d.danger.trim()).map(({ criticite, ...d }) => d),
+        mesures_immediates: split(imm), points_a_verifier: split(pts), references: split(refs),
+        mesures_preventives: a.mesures_preventives.filter(m => m.mesure.trim()) };
+      save.disabled = true; save.textContent = 'Enregistrement…';
+      try { const r = await api(`/api/remontees/${e.id}`, { method:'PATCH', body:{ analysis: out } }); replaceEntry(r.item); rerender(e.id); toast('Analyse enregistrée'); }
+      catch (err) { save.disabled = false; save.textContent = "Enregistrer l'analyse"; toast(err.offline ? 'Pas de réseau.' : (err.message || "L'enregistrement a échoué.")); }
+    };
+    wrap.append(
+      el('label', { class:'field' }, el('span', { text:'Synthèse' }), synth),
+      el('div', { class:'field' }, el('span', { style:'display:block;font-size:14px;font-weight:600;margin-bottom:4px', text:'Dangers et cotation' }), dBox,
+        el('button', { type:'button', class:'btn ghost small', text:'Ajouter un danger', onclick:() => { a.dangers.push({ famille:'Autre', danger:'', dommage_possible:'', gravite:2, probabilite:2, justification:'' }); drawD(); } })),
+      el('label', { class:'field' }, el('span', { text:'À faire tout de suite (une mesure par ligne)' }), imm),
+      el('div', { class:'field' }, el('span', { style:'display:block;font-size:14px;font-weight:600;margin-bottom:4px', text:'Mesures préventives' }), mBox,
+        el('button', { type:'button', class:'btn ghost small', text:'Ajouter une mesure', onclick:() => { a.mesures_preventives.push({ niveau:'Organisationnel', mesure:'', responsable_suggere:'' }); drawM(); } })),
+      el('label', { class:'field' }, el('span', { text:'À vérifier sur place (un point par ligne)' }), pts),
+      el('label', { class:'field' }, el('span', { text:'Références (une par ligne)' }), refs),
+      el('div', { class:'row' }, save, el('button', { type:'button', class:'btn ghost small', text:'Annuler', onclick:onDone })));
+    return wrap;
+  }
+
+  // ---------- Lightbox ----------
+  const lb = $('#lightbox');
+  function openLightbox(src) { lb.querySelector('img').src = src; lb.showModal ? lb.showModal() : lb.setAttribute('open', ''); }
+  $('#lbClose').onclick = () => lb.close();
+  lb.addEventListener('click', ev => { if (ev.target === lb) lb.close(); });
+
   // ---------- Export CSV ----------
-  const csvCell = v => `"${String(v ?? '').replace(/"/g,'""').replace(/\r?\n/g,' ')}"`;
+  const csvCell = v => `"${String(v ?? '').replace(/"/g, '""').replace(/\r?\n/g, ' ')}"`;
   $('#exportBtn').onclick = () => {
-    const head = ['ID','Date','Déclarant','Type','Secteur','Lieu','Description','Note vocale','Statut','N° danger','Famille','Danger','Dommage possible','Gravité','Probabilité','Criticité','Niveau','Mesures immédiates','Mesures préventives'];
+    const head = ['ID','Date','Déclarant','Type','Secteur','Lieu','Description','Note vocale','Statut','Date de clôture','N° danger','Famille','Danger','Gravité','Probabilité','Criticité','Niveau','Mesures immédiates','Mesures préventives','Actions mises en place','Message au déclarant'];
     const rows = [head];
-    for (const e of entries) {
+    for (const e of filtered()) {
       const a = normalize(e.analysis);
       const imm = a.mesures_immediates.join(' / ');
       const prev = a.mesures_preventives.map(m => `[${m.niveau}] ${m.mesure}`).join(' / ');
+      const acts = (e.suivi?.actions || []).map(x => `${x.fait ? '[fait] ' : '[à faire] '}${x.texte}`).join(' / ');
       const ds = a.dangers.length ? a.dangers : [null];
-      ds.forEach((d, i) => rows.push([e.id, new Date(e.date).toLocaleString('fr-FR'), e.declarant, e.type, e.secteur, e.lieu, e.desc, e.note_vocale, e.statut,
-        d ? i+1 : '', d?.famille, d?.danger, d?.dommage_possible, d?.gravite, d?.probabilite, d?.criticite, d ? BAND_LBL[band(d.criticite)] : '', imm, prev]));
+      ds.forEach((d, i) => rows.push([e.id, fmtDateTime(e.date), e.declarant, e.type, e.secteur, e.lieu, e.desc, e.note_vocale, e.statut, e.closed_at ? fmtDate(e.closed_at) : '',
+        d ? i + 1 : '', d?.famille, d?.danger, d?.gravite, d?.probabilite, d?.criticite, d ? BAND_LBL[band(d.criticite)] : '', imm, prev, acts, e.suivi?.message]));
     }
     const csv = '\ufeff' + rows.map(r => r.map(csvCell).join(';')).join('\r\n');
     const url = URL.createObjectURL(new Blob([csv], { type:'text/csv;charset=utf-8' }));
-    const a = el('a', { href:url, download:`registre-remontees-${new Date().toISOString().slice(0,10)}.csv` });
-    document.body.append(a); a.click(); a.remove();
+    const link = el('a', { href:url, download:`registre-remontees-${new Date().toISOString().slice(0, 10)}.csv` });
+    document.body.append(link); link.click(); link.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
   // ---------- Démarrage ----------
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
   (async () => {
-    if (API_URL.includes('VOTRE-SOUS-DOMAINE')) { showGate("Application non configurée : renseignez l'adresse du serveur (API_URL) dans index.html."); return; }
-    const s = loadSession();
+    const s = readJSON(SESSION_KEY, null);
     if (s?.code && s?.name) {
+      if (!s.uid) s.uid = uidFor(s.name);
       try { await enter(s.name, s.code); return; }
-      catch (e) { session = null; showGate(e.status === 401 ? "Le code d'accès a changé. Saisissez le nouveau code." : (e.message || 'Connexion impossible.')); return; }
+      catch (e) {
+        if (e.offline && s.role) { session = s; showApp(); return; }   // hors ligne : on garde la session
+        session = null;
+        showGate(e.status === 401 ? "Le code d'accès a changé. Saisissez le nouveau code." : (e.message || 'Connexion impossible.'));
+        return;
+      }
     }
     showGate();
   })();
 })();
-
 </script>
 </body>
 </html>
